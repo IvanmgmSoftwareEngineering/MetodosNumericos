@@ -45,11 +45,14 @@
 %           el uso de Aproximaci?n en sustituci?n al uso de la funci?n real
 %           por el Ahorro computacional que supone pasar de evaluar 1000
 %           puntos en la funci?n real a evaluar s?lo 5 puntos en la
-%           Aproximaci?n. Cuanto m?s exigente sea el problema que estamos
+%           Aproximaci?n. Cuanto m?s exigente sea el problema particular que estamos
 %           tratando menor ser? el Error que se permita cometer y en
-%           consecuencia necesitaremos aproxiamciones mejores lo que trae
-%           coomo consecuencia en la utilizaci?n de un mayor n?mero de
-%           puntos para obtener una Aproximaci?n
+%           consecuencia necesitaremos aproximaciones mejores, lo que trae
+%           coomo consecuencia la utilizaci?n de un mayor n?mero de
+%           puntos para obtener una Aproximaci?n lo suficientemente buena,
+%           y esto conllevar? un mayor coste computacional frente a una
+%           Aproximaci?n que haga uso de un menor n?mero de puntos.
+%           
 %           
 %           
 
@@ -98,7 +101,14 @@
 %
                n=2;
                rutina1;   
-               plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21); 
+               plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21);
+               
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(
        
 %       CASO 2) Tres puntos ==> n = 3
 

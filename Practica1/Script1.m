@@ -85,7 +85,7 @@
 %               intervalo.
                n=1000;
                X0=linspace(a,b,n);
-               F=zeros(1,1000);
+               F=zeros(1,n);
                for i=1:n
                 F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
                end
@@ -100,37 +100,93 @@
 %       CASO 1) Dos puntos ==> n = 2
 %
                n=2;
-               rutina1;   
-               plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21); 
+               rutina1; 
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(F - I);
+                CotaError1=max(E)
+                
+               %Dibujo
+                plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21);
+               
+               
        
 %       CASO 2) Tres puntos ==> n = 3
 
                n=3;
-               rutina1;   
+               rutina1; 
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(F - I);
+                CotaError2=max(E)
+                
+               %Dibujo
                plot(X,I,'MarkerEdgeColor',[0.3 0.3 0.3],'LineWidth',2,'Marker','*','MarkerSize',18,'MarkerFaceColor',[0.3 0.3 0.3]); 
                
 %       CASO 3) Cuatro puntos ==> n = 4
 
                n=4;
-               rutina1;   
+               rutina1; 
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(F - I);
+                CotaError3=max(E)
+                
+               %Dibujo
                plot(X,I,'MarkerEdgeColor',[0.4 0.4 0.4],'LineWidth',2,'Marker','*','MarkerSize',15,'MarkerFaceColor',[0.4 0.4 0.4]); 
 
 %       CASO 4) Cinco puntos ==> n = 5
 
                n=5;
-               rutina1;   
+               rutina1;
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(F - I);
+                CotaError3=max(E)
+                
+               %Dibujo
                plot(X,I,'MarkerEdgeColor',[0.5 0.5 0.5],'LineWidth',2,'Marker','*','MarkerSize',12,'MarkerFaceColor',[0.5 0.5 0.5]); 
 
 %       CASO 5) Seis puntos ==> n = 6
 
                n=6;
-               rutina1;   
+               rutina1; 
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(F - I);
+                CotaError5=max(E)
+                
+               %Dibujo
                plot(X,I,'MarkerEdgeColor',[0.6 0.6 0.6],'LineWidth',2,'Marker','*','MarkerSize',9,'MarkerFaceColor',[0.6 0.6 0.6]); 
  
 %       CASO 6) Siete puntos ==> n = 7
 
                n=7;
-               rutina1;   
+               rutina1;  
+               %Calculo el Error cometido |f(x)-I(x)|
+                F=zeros(1,n);
+                for i=1:n
+                    F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
+                end
+                E=abs(F - I);
+                CotaError6=max(E)
+                
+               %Dibujo
                plot(X,I,'MarkerEdgeColor',[0.7 0.7 0.7],'LineWidth',2,'Marker','*','MarkerSize',6,'MarkerFaceColor',[0.7 0.7 0.7]); 
                legend('f(x) = exp(-x) + cos(4x/pi)','Aproximacion n=2','Aproximacion n=3',...
                'Aproximacion n=4','Aproximacion n=5','Aproximacion n=6','Aproximacion n=7'); 
