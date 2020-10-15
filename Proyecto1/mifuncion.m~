@@ -1,0 +1,46 @@
+%% AUTOR: IVAN MARTIN GOMEZ
+
+function vector_con_los_L_i = polinomioLagrange(opcion_tipo_intervalo,numPuntos,extremo_inf_interval,extremo_sup_interval)
+
+if (extremo_inf_interval >= extremo_sup_interval)
+    error ('El Extremo inferior del Intervalo debe ser mayor que el Extremo Superior del Intervalo')
+end
+
+if (numPuntos == 0)
+    error ('El n?mero de puntos para calcular el Polinomio de Lagrange debe ser mayor que cero')
+end
+
+%Tomamos numPuntos Equiespaciados dentro del Intervalo Cerrado
+%[extremo_inf_interval,extremo_sup_interval
+if (opcion_tipo_intervalo == 1 )
+       puntos= linspace(extremo_inf_interval,extremo_sup_interval,numPuntos);
+end
+
+%Para evitar hacerlo con Matlab Simb?lico, cada fila de la matriz L
+%representa un Li(x), cada columna de cada una de las filas, representa el
+%valor de Li(x) paraticularicado en cada uno de los puntos, es decir,
+%Li(xj). Ejemplo para dos puntos: L=[Lo(xo),Lo(x1);L1(xo),Lo(x1)]
+L=zeros(numPuntos,numPuntos);
+
+for i = 1:numPuntos+1
+       for j = 1:numPuntos+1
+           if ( i == j)
+            L(i,j) = 1;
+       end
+end
+f=x^2+x^3;
+
+
+
+x=0;
+for i=1:100
+    x=x+i;
+end
+salida=x;
+end
+
+
+   
+     
+
+

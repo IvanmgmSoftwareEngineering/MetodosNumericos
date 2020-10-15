@@ -1,0 +1,4 @@
+%% RUTINA 1
+% AUTOR: IVAN MARTIN GOMEZ
+
+x='Buenos dias'
