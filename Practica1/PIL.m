@@ -24,7 +24,7 @@
 % ERRORES: -
 %   
 % 
-% DESCRIPCI?N: Esta funcion calcula el Polinomio Interpolador de Lagrange, despues particulariza 
+% DESCRIPCION: Esta funcion calcula el Polinomio Interpolador de Lagrange, despues particulariza 
 %              en cada uno de los n puntos discretos del Intervalo Cerrado,
 %              ,obteniendo asi un vector fila. Notar que los
 %              pasos anteriormente citados ("...calcula el 

@@ -18,7 +18,7 @@
 %              que devuelve una matriz con cada uno de los Polinomios en Base Lagrange
 %              particularizados en cada uno de los n puntos discretos del intervalo
 %              cerrado [a,b].
-%              A continuacion, llamara a la funci?n PIL(n,a,b,Lij)
+%              A continuacion, llamara a la funcion PIL(n,a,b,Lij)
 %              que devuelve un vector fila con el resultado de
 %              particularizar cada uno de los n puntos discretos del
 %              intervalo cerrado [a,b] en el Polinomio Interpolador de

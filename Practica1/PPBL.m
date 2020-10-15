@@ -15,7 +15,7 @@
 % ERRORES:
 %   ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
 % 
-% DESCRIPCI?N: Esta funcion calcula cada uno de los Polinomios en Base de Lagrange (habr? tantos como puntos discretos n) y 
+% DESCRIPCION: Esta funcion calcula cada uno de los Polinomios en Base de Lagrange (habr? tantos como puntos discretos n) y 
 %              los almacena en diferentes filas de un vector columna [Lo;L1;...;Ln], despues particulariza cada
 %              uno de los polinomios obtenidos antes en cada uno de los n
 %              puntos discretos, obteniendo asi una matriz. Notar que los
