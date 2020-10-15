@@ -2,13 +2,6 @@
 
 % TITULO: Polinomio Interpolador de Lagrange (PIL)
 % AUTOR: IVAN MARTIN GOMEZ
-
-% ARGUMENTOS ENTRADA:
-%   ARGUMENTO 1: n   --> N?mero Puntos Discretos del Intervalo Cerrado
-%   ARGUMENTO 2: a   --> Extremo Inferior Intervalo Cerrado. Lo toma del
-%                        Workspace
-%   ARGUMENTO 3: b   --> Extremo Superior Intervalo Cerrado. Lo toma del
-%                        Workspace
 %
 % ERRORES:
 %   ERROR 1: Se comprueba que a < b, en caso contrario se devuelve error.
@@ -18,11 +11,7 @@
 %              que devuelve una matriz con cada uno de los Polinomios en Base Lagrange
 %              particularizados en cada uno de los n puntos discretos del intervalo
 %              cerrado [a,b].
-%              A continuac?n, llamar? a la funci?n PIL(n,a,b,Lij)
-%              que devuelve un vector fila con el resultado de
-%              particularizar cada uno de los n puntos discretos del
-%              intervalo cerrado [a,b] en el Polinomio Interpolador de
-%              Lagrange.
+%              A continuac?n, llamar? a la funci?n PIL(n)
 %-------------------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------------------
 %Control de Errores en Argumentos de Entrada
@@ -45,17 +34,14 @@
     %Llamamos a la funci?n PPBL.m para obtener los Polinomios en Base de
     %Lagrange
     
-        L=PPBL(n);
+        Lij=PPBL(n);
         
-    %Tomamos n Puntos Equiespaciados dentro del Intervalo Cerrado [a,b] y los
-    %almacenamos en un vector fila llamado 'X'.
-
-        X=linspace(a,b,n);
+    
         
     %Llamamos a la funci?n PIL.m para obtener el Polinomio Interpolador de
     %Lagrange
     
-        I=PIL(n,X,L);
+        In=PIL(n,a,b);
     
         
 

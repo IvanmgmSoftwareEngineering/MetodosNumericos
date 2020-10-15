@@ -33,7 +33,7 @@
 function Lij = PPBL(n)
     %Control de Errores en Argumentos de Entrada
         %ERROR 1: Se comprueba que n > 0, en caso contrario se devuelve error.
-            if (n <= 1)
+            if (n <= 0)
                 error ('El n?mero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
             end
     %FIN Control de Errores en Argumentos de Entrada
