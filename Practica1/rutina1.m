@@ -4,7 +4,7 @@
 % AUTOR: IVAN MARTIN GOMEZ
 
 % ARGUMENTOS ENTRADA:
-%   ARGUMENTO 1: n   --> N?mero Puntos Discretos del Intervalo Cerrado
+%   ARGUMENTO 1: n   --> Numero Puntos Discretos del Intervalo Cerrado
 %   ARGUMENTO 2: a   --> Extremo Inferior Intervalo Cerrado. Lo toma del
 %                        Workspace
 %   ARGUMENTO 3: b   --> Extremo Superior Intervalo Cerrado. Lo toma del
@@ -14,11 +14,11 @@
 %   ERROR 1: Se comprueba que a < b, en caso contrario se devuelve error.
 %   ERROR 2: Se comprueba que n > 0, en caso contrario se devuelve error.
 %    
-% DESCRIPCION: Esta rutina1.m, llamar? a la funci?n PBL(n)
+% DESCRIPCION: Esta rutina1.m, llamara a la funcion PBL(n)
 %              que devuelve una matriz con cada uno de los Polinomios en Base Lagrange
 %              particularizados en cada uno de los n puntos discretos del intervalo
 %              cerrado [a,b].
-%              A continuac?n, llamar? a la funci?n PIL(n,a,b,Lij)
+%              A continuacion, llamara a la funci?n PIL(n,a,b,Lij)
 %              que devuelve un vector fila con el resultado de
 %              particularizar cada uno de los n puntos discretos del
 %              intervalo cerrado [a,b] en el Polinomio Interpolador de
@@ -42,7 +42,7 @@
 %-------------------------------------------------------
 %Empieza la funcionalidad de la Rutina
 
-    %Llamamos a la funci?n PPBL.m para obtener los Polinomios en Base de
+    %Llamamos a la funcion PPBL.m para obtener los Polinomios en Base de
     %Lagrange
     
         L=PPBL(n);
@@ -52,7 +52,7 @@
 
         X=linspace(a,b,n);
         
-    %Llamamos a la funci?n PIL.m para obtener el Polinomio Interpolador de
+    %Llamamos a la funcion PIL.m para obtener el Polinomio Interpolador de
     %Lagrange
     
         I=PIL(n,X,L);
