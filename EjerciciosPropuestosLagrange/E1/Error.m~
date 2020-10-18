@@ -171,9 +171,7 @@ function [e,cota] = Error(n,X,f)
                                     end
                                 end
                         
-                                for i=1:length(gr)
-                                        collect(abs_gr(i))
-                                    end
+                                
                                
                                 
                     %--> Puntos donde la funcion g(x) NO sea Diferenciable
@@ -263,25 +261,25 @@ function [e,cota] = Error(n,X,f)
                 %Diferenciable (en caso de existir alguno).
                 
                     if(hay_puntos_Estacionarios==0 && hay_puntos_No_Diferenciables==0)
-                        cota=max(extremos_g);
+                        cota_g=max(extremos_g);
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
                             max1=max(extremos_g);
                             max2=max(abs_gr);
                             max3=max(abs_gnd);                            
                             vector=[max1 max2 max3];                       
-                            cota=max(vector);
+                            cota_g=max(vector);
                         else
                             if(hay_puntos_Estacionarios==1)
                                 max1=max(extremos_g);
                                 max2=max(abs_gr);
                                 vector=[max1 max2];                       
-                                cota=max(vector);
+                                cota_g=max(vector);
                             else
                                 max1=max(extremos_g);
                                 max3=max(abs_gnd);
                                 vector=[max1 max3];                       
-                                cota=max(vector);
+                                cota_g=max(vector);
                             end
                         end
                     end
@@ -327,10 +325,10 @@ function [e,cota] = Error(n,X,f)
                             % podemos asegurar que la funcion h(x) sea un
                             % polinomio, entonces no podemos asegurar que
                             % la derivada de la funcion h(x), dh(x) sea un
-                            % polinomio. Entonces tenemos dos opciones para
+                            % polinomio. Entonces tenemos dos estrategias para
                             % encontrar donde dh(x) se anula en el caso de 
                             % no ser dh(x) un polinomio:
-                                %  Opcion 1: Utilizar la funcion 'fzeros' ya
+                                %  Estrategia 1: Utilizar la funcion 'fzeros' ya
                                 %  implementada en Matlab, que devuelve el
                                 %  primer punto que hace que la funcion
                                 %  dh(x) se anule. Esta opcion es una
@@ -340,7 +338,7 @@ function [e,cota] = Error(n,X,f)
                                 
                                 
                                 
-                                % Opcion 2: Desarrolar un algortimo que
+                                % Estrategia 2: Desarrolar un algortimo que
                                 % busque dentro del Intervalo Cerrado [a,b]
                                 % , puntos donde la funcion dh(x) se haga
                                 % cero. Mediante esta opcion, nos
@@ -385,7 +383,8 @@ function [e,cota] = Error(n,X,f)
                                    tipo_polinomio=0;
                                end
                                 
-                               if(tipo_polinomio==1)
+                         if(tipo_polinomio==1) %Entramos en el caso en que la funcion dh(x) Si es un Polinomio
+                                
                                 if(dh == 0)
                                     hay_puntos_Estacionarios=0;
                                     r3=[];
@@ -450,19 +449,47 @@ function [e,cota] = Error(n,X,f)
                                     end
                                 end
                         
-                                for i=1:length(hr)
-                                        collect(abs_hr(i))
-                                end
+                                
                                
                         % FIN Caso 1
-                               else
+                        else % Estamos en el caso en que dh(x) No es un Polinomio
                         
-                        % Caso 2: La funcion h(x) No es un Polinomio
+                        % Caso 2: La funcion h(x) No es un Polinomio.
+                        % Debemos buscar los puntos estacionarios
+                        % utilizando una de las dos Estrategias mencionadas
+                        % al principio de este apartado
+                            
+                            %  Estrategia 1: Utilizar la funcion 'fzeros' ya
+                                %  implementada en Matlab, que devuelve el
+                                %  primer punto que hace que la funcion
+                                %  dh(x) se anule. Esta opcion es una
+                                %  opcion limitada, ya que la funcion
+                                %  fzeros solo devuelve el primer cero que
+                                %  encuentra, si hay mas los ignora.
+                                
+                                % Estrategia 2: Desarrolar un algortimo que
+                                % busque dentro del Intervalo Cerrado [a,b]
+                                % , puntos donde la funcion dh(x) se haga
+                                % cero. Mediante esta opcion, nos
+                                % aseguramos encontrar cada uno de los
+                                % puntos donde la funcion dg(x) se anula.
+                                % La limitacion de este algortimo vendra
+                                % dada por la cantidad de cifras
+                                % significativas utilizadas para
+                                % dividir el Intervalo Cerrado [a,b] y por
+                                % la longitud total del intervalo [a,b].
+                                % Las limitaciones anteriromente
+                                % mencionadas haran que el algoritmo tarde
+                                % mas o menos en arrojar una solucion en
+                                % caso de encontrarla.
+                                
+                                
+                                
                         
                         
                         
                         
-                        
+                        % FIN Caso 1
                                end
                         
                         
@@ -495,7 +522,7 @@ function [e,cota] = Error(n,X,f)
                            %dividiremos el Intervalo Cerrado [0,pi/2] 
                            %en m puntos equiespaciados una distancia de 0.0001
                            %pnh = puntos donde h(x) No es Diferenciable
-                           %gnh = Evaluacion de h(x) en los puntos donde h(x) No 
+                           %hnd = Evaluacion de h(x) en los puntos donde h(x) No 
                            %      es Diferenciable
                                 
                             %Buscamos puntos del Intervalo [a,b] donde la
@@ -513,14 +540,14 @@ function [e,cota] = Error(n,X,f)
 %                                 contador=1;
 %                                 pnd=[];
 %                                 for i=X(1):0.0001:X(n)
-%                                     evaluacion=subs(1/dg,x,i);
+%                                     evaluacion=subs(1/dh,x,i);
 %                                     if(evaluacion==0)
-%                                         pnd(contador)=i;
+%                                         pnh(contador)=i;
 %                                         contador=contador +1;
 %                                     end
 %                                 end
 %                                 
-%                                 if (length(pnd) > 0)
+%                                 if (length(pnh) > 0)
 %                                     hay_puntos_No_Diferenciables=1;
 %                                 else
 %                                     hay_puntos_No_Diferenciables=0;
@@ -548,37 +575,41 @@ function [e,cota] = Error(n,X,f)
                 %funcion h(x). Para ello nos quedamos con el mayor en valor
                 %absoluto de entre los siguientes valores: h(x)
                 %particularizada en el Exgtremo inferior del intervalo
-                %[a,b], h(x) particularizada en el Extremo Sperior del
+                %[a,b], h(x) particularizada en el Extremo Superior del
                 %Intervalo [a,b], h(x) particularizada en cada uno de los
                 %Puntos Estacionarios (en caso de existir alguno) y h(x)
                 %particularizada en los puntos deonde la funcion h(x) No es
                 %Diferenciable (en caso de existir alguno).
                 
                     if(hay_puntos_Estacionarios==0 && hay_puntos_No_Diferenciables==0)
-                        cota=max(extremos);
+                        cota_h=max(extremos_h);
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
                             max1=max(extremos_h);
-                            max2=max(abs_gr);
+                            max2=max(abs_hr);
                             max3=max(abs_gnd);                            
                             vector=[max1 max2 max3];                       
-                            cota=max(vector);
+                            cota_h=max(vector);
                         else
                             if(hay_puntos_Estacionarios==1)
                                 max1=max(extremos_h);
-                                max2=max(abs_gr);
+                                max2=max(abs_hr);
                                 vector=[max1 max2];                       
-                                cota=max(vector);
+                                cota_h=max(vector);
                             else
                                 max1=max(extremos_h);
                                 max3=max(abs_gnd);
                                 vector=[max1 max3];                       
-                                cota=max(vector);
+                                cota_h=max(vector);
                             end
                         end
                     end
                     
            %FIN Subproblema 2
+           
+           %Ahora ya estamos ya podemos dar la Cota de la funcion E(x)
+           
+           cota=val1*cota_g*cota_h;
         %FIN calculo Cota funcion E(x)
                            
         
