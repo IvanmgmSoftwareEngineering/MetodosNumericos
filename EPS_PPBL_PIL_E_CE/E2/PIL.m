@@ -42,7 +42,7 @@ function p = PIL(n,X,L,f)
         %Calculamos el Polinomio Interpolador de Lagrange 
             syms x;
             inter=sym('0');
-            for i=1:n    
+            for i=1:n   
                  f_aux=subs(f,x,X(i));
                  inter=inter + f_aux*L(i) ;                                   
             end 

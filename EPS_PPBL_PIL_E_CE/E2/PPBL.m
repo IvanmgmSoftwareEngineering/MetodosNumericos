@@ -35,7 +35,8 @@ function Li = PPBL(n,X)
 %-------------------------------------------------------
     %Empieza funcionalidad funcion
         syms x;
-        for i = 1:n     
+        for i = 1:n 
+            
             L(i)=sym('1');
             for j = 1:n
                 if(i~=j)
@@ -45,11 +46,12 @@ function Li = PPBL(n,X)
         end
         Li = L;
         
-%       for i = 1:n 
-%           for j = 1:n                
-%               Laux(i,j)=subs(L(i),x,X(j));                 
-%           end
-%       end
+        for i = 1:n 
+            for j = 1:n
+                
+                    Laux(i,j)=subs(L(i),x,X(j));                 
+            end
+        end
         
         %spy(Laux,'+',20);
 end

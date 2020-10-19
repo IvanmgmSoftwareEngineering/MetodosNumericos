@@ -2,34 +2,35 @@
 %  DESCRIPCION: Calculo de los PPBL, PIL, Error y Cota Error
 %  AUTOR: IVAN MARTIN GOMEZ
 
-%% Ejercio 1: 
+%% Ejercio 2: 
 %  Datos: 
-%       --> Funcion que queremos Aproximar:         f(x) = cos(x)
-%       --> Intervalo Cerrado:                      [0,pi/2]
-%       --> Numero puntos utilizados Aproximacion:  n = 4 
+%       --> Funcion que queremos Aproximar:         f(x) = 2*x*exp(-4*x-2)
+%       --> Intervalo Cerrado:                      [0.2,1]
+%       --> Numero puntos utilizados Aproximacion:  n = 3 
 %
-%  nota: Soluci?n oficial:          |E(x)|=< 0.0005348
-%        Solucion obtenida por mi:  |E(x)|=< 0.0031
+%  nota: Solucion oficial:          p2(x) = (-5.75*10^4)* x^2 - (0.024)* x + 0.029
+%                                           
+%        Solucion obtenida por mi:  p2(x) = idem solucion oficial
 
 
-%       --> Especificamos Funcion f(x)= cos(x) que queremos 
+%       --> Especificamos Funcion f(x)= 2*x*exp(-4*x-2) que queremos 
 %           Aproximar mediante el Polinomio
 %           Interpolador de Lagrange
                 close;
                 clear all;
                 clc;
                 syms x;               
-                f = cos(x);
+                f = 2*x*exp(-4*x-2);
                 
 %       --> Especificamos el intervalo cerrado [a,b].
 %               
-                a=0;
-                b=pi/2;
+                a=0.2;
+                b=1;
                 
 %       --> Especificamos el numero de puntos discretos que utilizaremos en
 %           la Aproximacion
 %               
-                n=4;
+                n=3;
                 
 %       
 
@@ -50,7 +51,7 @@
                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
                title('Funcion y Polinomio Interpolador Lagrange');
                xlabel('x');
-               axis([a b -1 2.5]);
+               axis([a b 0.004 0.025]);
                grid on;
                hold on;
          
@@ -82,7 +83,7 @@
                    plot(X0,E,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2);
                    title('Error y Cota de Error');
                    xlabel('x');
-                   axis([a b 0 0.004]);
+                   axis([a b 0 0.018]);
                    grid on;
                    hold on;
                    
