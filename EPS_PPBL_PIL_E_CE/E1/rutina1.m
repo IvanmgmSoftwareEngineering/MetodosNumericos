@@ -64,10 +64,11 @@
             I(i) = subs(p,x,X(i));                                   
         end
         
-     %Llamamos a la funci?n Error.m para obtener la expresi?n del Error y 
+     %Llamamos a la funcion Error.m para obtener la expresion del Error y 
      %la Cota de Error.
-     
-        [e,cota]=Error(n,X,f);
+        abs_gr=[];
+        abs_hr=[];
+        [error,cotaError,g,h,abs_gr,abs_hr]=Error(n,X,f);
     
         
 

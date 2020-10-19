@@ -3,7 +3,7 @@
 % TITULO: Error Aproximacion mediante Polinomio Interpolador Lagrange
 % AUTOR: IVAN MARTIN GOMEZ
 %
-% SINTAXIS: e(n,X,f)
+% SINTAXIS: Error(n,X,f)
 % ARGUMENTOS ENTRADA:
 %   ARGUMENTO 1: n         --> Numero Puntos Discretos del Intervalo Cerrado
 %   ARGUMENTO 2: X         --> Vector fila con n puntos discretos equiespaciados
@@ -12,7 +12,13 @@
 % SALIDAS:       
 %   SALIDA 1:    e         --> Expresion del Error cometido.
 %   SALIDA 2:    CotaError --> Valor Cota de Error
-%                             
+%   SALIDA 3:    g         --> Funcion g(x)
+%   SALIDA 4:    h         --> Funcion h(x)
+%   (nota: E(x) = 1/!n * g(x) * h(x))
+%   SALIDA 5:    abs_gr    --> Valor absoluto de Puntos Estacionarios funcion
+%                              g(x) particularizados en la funcion g(x)
+%   SALIDA 6:    abs_hr    --> Valor absoluto de Puntos Estacionarios funcion
+%                              h(x) particularizados en la funcion h(x)                  
 %
 % ERRORES:
 %   ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
@@ -25,7 +31,7 @@
 %-------------------------------------------------------------------------------------------------
 %Empieza funcion
 
-function [e,cota] = Error(n,X,f)
+function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
     %Control de Errores en Argumentos de Entrada
         %ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
             if (n <= 1)
