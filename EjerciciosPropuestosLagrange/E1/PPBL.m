@@ -53,7 +53,7 @@ function Li = PPBL(n,X)
             end
         end
         
-        spy(Laux,'+',20);
+        %spy(Laux,'+',20);
 end
 %   FIN funcionalidad funcion
 %-------------------------------------------------------

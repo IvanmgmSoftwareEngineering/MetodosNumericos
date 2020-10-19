@@ -111,16 +111,16 @@ function [e,cota] = Error(n,X,f)
                                     hay_puntos_Estacionarios=0;
                                     r=[];
                                 else                               
-                                    cdg=coeffs(dg) %Ordenado de menor a mayor
-                                    cdg = fliplr(cdg) %Ordenado de mayor a menor 
-                                    if(length(cgd) == 1)
+                                    cdg=coeffs(dg); %Ordenado de menor a mayor
+                                    cdg = fliplr(cdg); %Ordenado de mayor a menor 
+                                    if(length(cdg) == 1)
                                         hay_puntos_Estacionarios=0;                                       
                                         r=[];
                                     else
                                         % Obtenemos las raices de la
                                         % derivada de g(x). 
                                             r1=[];
-                                            r1=roots(cdg)
+                                            r1=roots(cdg);
                                             
                                         % Solo nos interesan las raices reales.    
                                         % Eliminamos las raices imaginarias
@@ -264,21 +264,21 @@ function [e,cota] = Error(n,X,f)
                         cota_g=max(extremos_g);
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
-                            max1=max(extremos_g);
-                            max2=max(abs_gr);
-                            max3=max(abs_gnd);                            
-                            vector=[max1 max2 max3];                       
+                            max1_g=max(extremos_g);
+                            max2_g=max(abs_gr);
+                            max3_g=max(abs_gnd);                            
+                            vector=[max1_g max2_g max3_g];                       
                             cota_g=max(vector);
                         else
                             if(hay_puntos_Estacionarios==1)
-                                max1=max(extremos_g);
-                                max2=max(abs_gr);
-                                vector=[max1 max2];                       
+                                max1_g=max(extremos_g);
+                                max2_g=max(abs_gr);
+                                vector=[max1_g max2_g];                       
                                 cota_g=max(vector);
                             else
-                                max1=max(extremos_g);
-                                max3=max(abs_gnd);
-                                vector=[max1 max3];                       
+                                max1_g=max(extremos_g);
+                                max3_g=max(abs_gnd);
+                                vector=[max1_g max3_g];                       
                                 cota_g=max(vector);
                             end
                         end
@@ -467,6 +467,8 @@ function [e,cota] = Error(n,X,f)
                                 %  fzeros solo devuelve el primer cero que
                                 %  encuentra, si hay mas los ignora.
                                 
+                                
+                                
                                 % Estrategia 2: Desarrolar un algortimo que
                                 % busque dentro del Intervalo Cerrado [a,b]
                                 % , puntos donde la funcion dh(x) se haga
@@ -483,7 +485,27 @@ function [e,cota] = Error(n,X,f)
                                 % mas o menos en arrojar una solucion en
                                 % caso de encontrarla.
                                 
+                                rdh=[];
+                                contador=1;
+                                for i=X(1):0.01:X(n)
+                                    if(subs(dh,x,i) == 0)
+                                        rdh(contador)=i;
+                                        contador=contador +1;
+                                    end
+                                end
                                 
+                                if(length(rdh)>0)
+                                    for i=1:length(rdh)
+                                        hr(i)=subs(h,x,rdh(i));
+                                    end
+                                end
+                                
+                                if(length(rdh)>0)
+                                    for i=1:length(rdh)
+                                        abs_hr(i)=abs(hr(i));
+                                    end
+                                end
+                                        
                                 
                         
                         
@@ -585,21 +607,21 @@ function [e,cota] = Error(n,X,f)
                         cota_h=max(extremos_h);
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
-                            max1=max(extremos_h);
-                            max2=max(abs_hr);
-                            max3=max(abs_hnd);                            
-                            vector=[max1 max2 max3];                       
+                            max1_h=max(extremos_h);
+                            max2_h=max(abs_hr);
+                            max3_h=max(abs_hnd);                            
+                            vector=[max1_h max2_h max3_h];                       
                             cota_h=max(vector);
                         else
                             if(hay_puntos_Estacionarios==1)
-                                max1=max(extremos_h);
-                                max2=max(abs_hr);
-                                vector=[max1 max2];                       
+                                max1_h=max(extremos_h);
+                                max2_h=max(abs_hr);
+                                vector=[max1_h max2_h];                       
                                 cota_h=max(vector);
                             else
-                                max1=max(extremos_h);
-                                max3=max(abs_hnd);
-                                vector=[max1 max3];                       
+                                max1_h=max(extremos_h);
+                                max3_h=max(abs_hnd);
+                                vector=[max1_h max3_h];                       
                                 cota_h=max(vector);
                             end
                         end
