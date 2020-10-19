@@ -4,22 +4,22 @@
 
 %% Ejercio 1: 
 %  Datos: 
-%       --> Funcion que queremos Aproximar:         f(x) = cos(x)
+%       --> Funcion que queremos Aproximar:         f(x) = cos(5*x +2)*x^2
 %       --> Intervalo Cerrado:                      [0,pi/2]
-%       --> Numero puntos utilizados Aproximacion:  n = 4 
-%
-%  nota: Solucion oficial:          |E(x)|=< 0.0005348
-%        Solucion obtenida por mi:  |E(x)|=< 0.0031
+%       --> Numero puntos utilizados Aproximacion:  Apartado a) n = 3 
+%                                                   Apartado b) n = 4 
+%  nota: Solucion oficial:          
+%        Solucion obtenida por mi:  
 
 
-%       --> Especificamos Funcion f(x)= cos(x) que queremos 
+%       --> Especificamos Funcion f(x)= cos(5*x +2)*x^2 que queremos 
 %           Aproximar mediante el Polinomio
 %           Interpolador de Lagrange
                 close;
                 clear all;
                 clc;
                 syms x;               
-                f = cos(x);
+                f = cos(5*x +2)*x^2;
                 
 %       --> Especificamos el intervalo cerrado [a,b].
 %               
@@ -29,7 +29,7 @@
 %       --> Especificamos el numero de puntos discretos que utilizaremos en
 %           la Aproximacion
 %               
-                n=4;
+                n=3;
                 
 %       
 
@@ -50,7 +50,7 @@
                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
                title('Funcion y Polinomio Interpolador Lagrange');
                xlabel('x');
-               axis([a b -1 2.5]);
+               axis([a b -2.5 1]);
                grid on;
                hold on;
          
@@ -82,7 +82,7 @@
                    plot(X0,E,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2);
                    title('Error y Cota de Error');
                    xlabel('x');
-                   axis([a b 0 0.004]);
+                   axis([a b 0 10]);
                    grid on;
                    hold on;
                    
@@ -91,7 +91,7 @@
                    lgd = legend;
                    lgd.FontSize = 18;
                    
-   % Muestor por Ventada de Comandos los datos del problema y los
+   % Muestro por Ventana de Comandos los datos del problema y los
    % resultados mas relevantes:
    format short;
    fprintf('-----------------------------------------\n');

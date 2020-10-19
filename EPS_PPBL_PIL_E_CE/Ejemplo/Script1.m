@@ -2,34 +2,35 @@
 %  DESCRIPCION: Calculo de los PPBL, PIL, Error y Cota Error
 %  AUTOR: IVAN MARTIN GOMEZ
 
-%% Ejercio 1: 
+%% Ejercio 4: 
 %  Datos: 
-%       --> Funcion que queremos Aproximar:         f(x) = cos(x)
-%       --> Intervalo Cerrado:                      [0,pi/2]
-%       --> Numero puntos utilizados Aproximacion:  n = 4 
-%
-%  nota: Solucion oficial:          |E(x)|=< 0.0005348
-%        Solucion obtenida por mi:  |E(x)|=< 0.0031
+%       --> Funcion que queremos Aproximar:         f(x) =sin(3*x)
+%       
+%       --> Intervalo Cerrado:                      [0,pi/4]
+%       --> Numero puntos utilizados Aproximacion:  Apartado a)n=2 
+%                                                   Apartado b)n=3
+%  nota: Solucion oficial:          
+%        Solucion obtenida por mi:  
 
 
-%       --> Especificamos Funcion f(x)= cos(x) que queremos 
+%       --> Especificamos Funcion f(x)= cos(5*x +2)*x^2 que queremos 
 %           Aproximar mediante el Polinomio
 %           Interpolador de Lagrange
                 close;
                 clear all;
                 clc;
                 syms x;               
-                f = cos(x);
+                f = sin(3*x);
                 
 %       --> Especificamos el intervalo cerrado [a,b].
 %               
                 a=0;
-                b=pi/2;
+                b=pi/4;
                 
 %       --> Especificamos el numero de puntos discretos que utilizaremos en
 %           la Aproximacion
 %               
-                n=4;
+                n=3;
                 
 %       
 
@@ -50,7 +51,7 @@
                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
                title('Funcion y Polinomio Interpolador Lagrange');
                xlabel('x');
-               axis([a b -1 2.5]);
+               axis([a b -0.75 2.1]);
                grid on;
                hold on;
          
@@ -82,7 +83,11 @@
                    plot(X0,E,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2);
                    title('Error y Cota de Error');
                    xlabel('x');
-                   axis([a b 0 0.004]);
+                   if(n==4)
+                   axis([a b 0 0.027]);
+                   elseif(n==3)
+                   axis([a b 0 0.25]);
+                   end
                    grid on;
                    hold on;
                    
