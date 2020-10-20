@@ -304,7 +304,7 @@
    fprintf('---> FAMILIA NEWTON-COTES\n');
    fprintf('\n');
    
-   fprintf('--------> CONSTANTE: FORMULA RECTANGULO');
+   fprintf('--------> CONSTANTE (1 punto): FORMULA RECTANGULO');
    fprintf('\n');
    fprintf('          (NOTA: los errores se calculan comparando con resultado Rectangulo Compuesto delta=cte 100 puntos)\n');
    fprintf('\n');
@@ -327,7 +327,7 @@
    disp(double(I_rec(4)));
    fprintf('\n');
    fprintf('\n');
-   fprintf('--------> LINEAL: FORMULA TRAPECIO');
+   fprintf('--------> LINEAL (2 puntos): FORMULA TRAPECIO');
    fprintf('\n');
    fprintf('          (NOTA: el error se calcula comparando con resultado Trapecio Compuesto delta=cte 100 puntos)\n');
    fprintf('\n');
@@ -339,7 +339,7 @@
    fprintf('--------------> TRAPECIO COMPUESTO delta=cte (100 puntos)   ===> I = ');
    disp(double(I_trap(2)));
    fprintf('\n');
-   fprintf('--------> PARABOLICO: FORMULA SIMPSON 1/3');
+   fprintf('--------> PARABOLICO (3 puntos): FORMULA SIMPSON 1/3');
    fprintf('\n');
    fprintf('\n');
    fprintf('---> FAMILIA CUADRATURA GAUSSIANA\n');
