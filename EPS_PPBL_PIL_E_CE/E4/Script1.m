@@ -2,7 +2,7 @@
 %  DESCRIPCION: Calculo de los PPBL, PIL, Error y Cota Error
 %  AUTOR: IVAN MARTIN GOMEZ
 
-%% Ejercio 4: 
+%% Ejercicio 4: 
 %  Datos: 
 %       --> Funcion que queremos Aproximar:         f(x) =cos(4*x/pi)+exp(-x)
 %       

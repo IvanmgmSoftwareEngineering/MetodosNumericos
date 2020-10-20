@@ -34,7 +34,7 @@
         
     %ERROR 2: Se comprueba que n > 0, en caso contrario se devuelve error.
             if (n <= 0)
-                error ('El numero de puntos para calcular los Polinomios en Base de Lagrange debe ser mayor que cero')
+                error ('El n?mero de puntos para calcular los Polinomios en Base de Lagrange debe ser mayor que cero')
             end
 
 %FIN Control de Errores en Argumentos de Entrada
@@ -42,31 +42,48 @@
 %-------------------------------------------------------
 %Empieza la funcionalidad de la Rutina
 
-    %Tomamos n Puntos Equiespaciados dentro del Intervalo Cerrado [a,b] y los
-    %almacenamos en un vector fila llamado 'X'.
+    
+    
+        
+    %Seleccionamos los puntos del Intervalo Cerrado [a,b] que seran
+    %utilizados en cada una de la Aproximaciones
+        if(formula_Rectangulo_Izquierdo==1)
+            X=[a];
+        elseif(formula_Rectangulo_Derecho==1)
+            X=[b];
+        elseif (formula_Rectangulo_Medio==1)
+            X=[(a+b)/2];
+        elseif (formula_Rectangulo_Compuesta_delta_cte==1)
+            X=X1;
+        elseif (formula_Trapecio==1)
+            X=[a b];
+        elseif (formula_Trapecio_Compuesta_delta_cte==1)
+            X=X1;
+        end
        
-        X=linspace(a,b,n);
-
-    %Llamamos a la funcion PPBL.m para obtener los Polinomios en Base de
-    %Lagrange
-    
-        L=PPBL(n,X);
         
-    
-        
-    %Llamamos a la funcion PIL.m para obtener el Polinomio Interpolador de
-    %Lagrange
-    
-        p=PIL(n,X,L,f);
-        
-                                           
-        
-        
-     %Llamamos a la funcion Error.m para obtener la expresion del Error y 
-     %la Cota de Error.
-        abs_gr=[];
-        abs_hr=[];
-        [error,cotaError,g,h,abs_gr,abs_hr]=Error(n,X,f);
+    %Obtenemos las Aproximaciones de las Integrales
+        if(formula_Rectangulo_Izquierdo==1)
+            I_rec(1) = abs(subs(f,x,X(1))*(b-a));
+        elseif(formula_Rectangulo_Derecho==1)
+            I_rec(2) = abs(subs(f,x,X(1))*(b-a));
+        elseif (formula_Rectangulo_Medio==1)
+            I_rec(3) = abs(subs(f,x,X(1))*(b-a));
+        elseif (formula_Rectangulo_Compuesta_delta_cte==1)
+            deltaX=X(2)-X(1);
+            I_rec(4)=0;
+            for i=1:99              
+                I_rec(4) = I_rec(4) + abs(rec_F(i)*(deltaX));
+            end       
+        elseif (formula_Trapecio==1)
+            I_trap(1)=(max([subs(f,x,a) subs(f,x,b)])-min([subs(f,x,a) subs(f,x,b)]))*(b-a)/2 + min([subs(f,x,a) subs(f,x,b)])*(b-a);
+        elseif (formula_Trapecio_Compuesta_delta_cte==1)
+            deltaX=X(2)-X(1);
+            I_trap(2)=0;
+            for i=1:99              
+                I_trap(2) = I_trap(2) + (max([trap_F(i) trap_F(i+1)])-min([trap_F(i) trap_F(i+1)]))*deltaX/2 + min([trap_F(i) trap_F(i+1)])*deltaX;
+            end
+        end
     
         
 
