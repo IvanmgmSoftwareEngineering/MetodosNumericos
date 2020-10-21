@@ -6,11 +6,14 @@
 % SINTAXIS: Lij(n,a,b)
 % ARGUMENTOS ENTRADA:
 %   ARGUMENTO 1: n   --> Numero Puntos Discretos del Intervalo Cerrado
+%   ARGUMENTO 2: X   --> Vector fila con n puntos discretos equiespaciados
 %
-% SALIDA:        Lij --> Matriz con los valores del Polinomio en Base de Lagrange
-%                        particularizados en cada punto discrero del Intervalo Cerrado
-%                        Lij = [Lo(xo),Lo(x1),...,Lo(xn);L1(xo),L1(x1),...,L1(xn);...;Ln(xo),Ln(x1),...,Ln(xn)]
-%                             = [1,0,0,...,0 ; 0,1,0,...,0 ; 0,0,0,...,1]
+% SALIDA:        Li --> Vector con los valores del Polinomio en Base de Lagrange                  
+%                        Li = [Lo, L1, ..., Ln]. Recordar que c?mo en
+%                        Matlab se empizan a indexar los vectores en 1,
+%                        entonces sustituiremos el sub?ndice 0 por 1 y el
+%                        sub?ndice n por n+1
+%                             
 %
 % ERRORES:
 %   ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
@@ -30,29 +33,28 @@
 %-------------------------------------------------------------------------------------------------
 %Empieza funci?n
 
-function Lij = PPBL(n)
+function Li = PPBL(n,X)
     %Control de Errores en Argumentos de Entrada
-        %ERROR 1: Se comprueba que n > 0, en caso contrario se devuelve error.
+        %ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
             if (n <= 1)
-                error ('El n?mero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
+                error ('El numero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
             end
     %FIN Control de Errores en Argumentos de Entrada
 %-------------------------------------------------------
 %-------------------------------------------------------
     %Empieza funcionalidad funcion
-
-        L=zeros(n,n);
-
-        for i = 1:n+1
-            for j = 1:n+1
-                if ( i == j)
-                    L(i,j) = 1;
-                else
-                    L(i,j) = 0;
+        syms x;
+        
+        for i = 1:n 
+            
+            L_aux(i)=sym('1');
+            for j = 1:n
+                if(i~=j)
+                L_aux(i) = L_aux(i) * (x - X(j))/(X(i)-X(j));  
                 end
             end
         end
-        Lij = L;
+        Li = L_aux;
 end
 %   FIN funcionalidad funcion
 %-------------------------------------------------------
