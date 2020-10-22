@@ -1,7 +1,7 @@
 %% PRACTICA 1
 %  AUTOR: IVAN MARTIN GOMEZ
 
-%% PRACTICA 1.1: Integracion Numerica
+%% PRACTICA 1.2: Integracion Numerica
 %           --> a) Programar 3 formulas del Rectangulo
 %           --> b) Programar la Formula del Trapecio
 %           --> c) Programar la Formula de Simpson 1/3
@@ -25,52 +25,107 @@
 %        de calculos que hay que hacer para obtener la Formula y la Representacion
 %        de Simpson 1/3 Compuesta. Hay que tener paciencia, pido disculpas por la espera)
 %
-%   VENTANA DE COMANDOS: --> Se muestran de forma ordenada, explicada y
-%                            etiquetada los resultados obtenidos
+%   --> FICHERO TEXTO:          --> Se genera un fichero llamado 'resultados.txt',
+%                                   donde se alamcenan todos los resultados obtenidos
 %
-%   FIGURA 1:            --> Muestra la funci?n f(x) con la region
-%                            comprendida entre la funcion y el Eje de Abcisas. 
-%                            Esta region coloreada representa el valor real
-%                            de la Integral.
-%   FIGURA 2:            --> Muestra los resultados de las Formulas del
-%                            Rectangulo    
-%       SUBFIGURA 2.1:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Izquierdo
-%       SUBFIGURA 2.2:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Derecho
-%       SUBFIGURA 2.3:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Medio
-%       SUBFIGURA 2.4:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Compuesto Izquierdo delta=cte 100 puntos
-%       SUBFIGURA 2.5:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Compuesto Derecho delta=cte 100 puntos
-%       SUBFIGURA 2.6:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Compuesto Medio delta=cte 100 puntos
+%   --> VENTANA DE COMANDOS:    --> Se muestran de forma ordenada, explicada y
+%                                   etiquetada los resultados obtenidos
 %
-%   FIGURA 3:            --> Muestra los resultados de las Formulas del
-%                            Trapecio
-%       SUBFIGURA 3.1:   --> Muestra los resultados de la Formula del
-%                            Trapecio Compuesto delta=cte 100 puntos
-%       SUBFIGURA 3.2:   --> Muestra los resultados de la Formula del
-%                            Trapecio
-%   FIGURA 4:            --> Muestra los resultados de las Formulas de
-%                            Simpson 1/3
-%       SUBFIGURA 4.1:   --> Muestra los resultados de la Formula de
-%                            Simpson 1/3 Compuesto delta=cte 100 puntos
-%       SUBFIGURA 4.2:   --> Muestra los resultados de la Formula del
-%                            Simpson 1/3
+%   --> FIGURAS:
+%
+%           FIGURA 1:           --> Muestra la funcion f(x) con la region
+%                                   comprendida entre la funcion y el Eje de Abcisas. 
+%                                   Esta region coloreada representa el valor real
+%                                   de la Integral.
+%
+%           FIGURA 2:           --> Muestra los resultados de las Formulas del
+%                                   Rectangulo  
+%
+%               SUBFIGURA 2.1:   --> Muestra los resultados de la Formula del
+%                                    Rectangulo Izquierdo
+%
+%               SUBFIGURA 2.2:   --> Muestra los resultados de la Formula del
+%                                   Rectangulo Derecho
+%
+%               SUBFIGURA 2.3:   --> Muestra los resultados de la Formula del
+%                                    Rectangulo Medio
+%
+%               SUBFIGURA 2.4:   --> Muestra los resultados de la Formula del
+%                                    Rectangulo Compuesto Izquierdo delta=cte 100 puntos
+%
+%               SUBFIGURA 2.5:   --> Muestra los resultados de la Formula del
+%                                    Rectangulo Compuesto Derecho delta=cte 100 puntos
+%
+%               SUBFIGURA 2.6:   --> Muestra los resultados de la Formula del
+%                                    Rectangulo Compuesto Medio delta=cte 100 puntos
+%
+%           FIGURA 3:           --> Muestra los resultados de las Formulas del
+%                                   Trapecio
+%
+%               SUBFIGURA 3.1:   --> Muestra los resultados de la Formula del
+%                                    Trapecio Compuesto delta=cte 100 puntos
+%
+%               SUBFIGURA 3.2:   --> Muestra los resultados de la Formula del
+%                                    Trapecio
+%
+%           FIGURA 4:           --> Muestra los resultados de las Formulas de
+%                                   Simpson 1/3
+%
+%               SUBFIGURA 4.1:   --> Muestra los resultados de la Formula de
+%                                    Simpson 1/3 Compuesto delta=cte 100 puntos
+%
+%               SUBFIGURA 4.2:   --> Muestra los resultados de la Formula del
+%                                    Simpson 1/3
+%
+%   WORKSPACE:
+%
+%       VARIABLE 1: a             --> Extremo inferior del intervalo
+%       VARIABLE 2: b             --> Extremo superiror del intervalo
+%       VARIABLE 3: f             --> Funcion de la cual queremos obtener la
+%                                     aproximacion su integral
+%       VARIABLE 4: Integral_rec  --> Vector con los valores de las
+%                                     aproximaciones de las integrales, utilizando las Formulas del
+%                                     Rectangulo
+%                                     Integral_rec(1): Aproximacion integral Formula Rectangulo Izquierdo 1 punto 
+%                                     Integral_rec(2): Aproximacion integral Formula Rectangulo Derecho 1 punto
+%                                     Integral_rec(3): Aproximacion integral Formula Rectangulo Medio 1 punto
+%                                     Integral_rec(4): Aproximacion integral Formula Rectangulo Compuesto Izquierdo m_rec puntos
+%                                     Integral_rec(5): Aproximacion integral Formula Rectangulo Compuesto Derecho m_rec puntos
+%                                     Integral_rec(6): Aproximacion integral Formula Rectangulo Compuesto Medio m_rec puntos
+%       VARIABLE 5: Integral_trap --> Vector con los valores de las
+%                                     aproximaciones de las integrales, utilizando las Formulas del
+%                                     Rectangulo
+%                                     Integral_trap(1): Aproximacion integral Formula Trapecio 2 puntos 
+%                                     Integral_trap(2): Aproximacion integral Formula Trapecio Compuesto m_trap puntos
+%                                     Integral_trap(3): Aproximacion integral Funcion trapz() 2 puntos
+%                                     Integral_trap(4): Aproximacion integral Funcion trapz() 100 puntos
+%                                     Integral_trap(5): Aproximacion integral Funcion trapz() 1000 puntos
+%       VARIABLE 5: Integral_simp --> Vector con los valores de las
+%                                     aproximaciones de las integrales, utilizando las Formulas de
+%                                     Simpson 1/3
+%                                     Integral_simp(1): Aproximacion integral Formula Simpson 1/3 3 puntos 
+%                                     Integral_simp(2): Aproximacion integral Formula Simpson 1/3 Compuesto m_simp puntos
+%       VARIABLE 6: m_rec         --> Numero de puntos para aproximacion Formulas Compuestas Rectangulo
+%       VARIABLE 7: m_trap        --> Numero de puntos para aproximacion Formula Compuesta Trapecio
+%       VARIABLE 8: m_simp        --> Numero de puntos para aproximacion Formula Compuesta Simpson 1/3
 
-%
-%  Datos: 
+%                                     
+
+%-------------------------------------------------------------------------------------------------------------------------
+%  
+close all;
+clear all;
+clc;
+
+
+%   Datos: 
 %       --> Funcion que queremos Aproximar:         f(x) = cos(-1 + x^2)
 %       
 %       --> Intervalo Cerrado:                      [0,2*pi]
 
 
 %       --> Especificamos Funcion f(x)= cos(-1 + x^2) 
-                close all;
-                clear all;
-                clc;
+                
                 syms x;               
                 f = cos(-1 + x^2);
                 
@@ -78,6 +133,19 @@
 %               
                 a=0;
                 b=2*pi;
+                
+%       --> Especificamos Numero de puntos para aproximacion Formulas Compuestas Rectangulo
+
+                m_rec=100;
+                
+%       --> Numero de puntos para aproximacion Formula Compuesta Trapecio
+
+                m_trap=100;
+                
+%       --> Numero de puntos para aproximacion Formula Compuesta Simpson 1/3  
+
+                m_simp=100;
+
 %
 
 %  Apartado a) Por definicion de las Formulas del Rectangulo Izquiero, Derecho y
@@ -86,7 +154,7 @@
 %              utilizaremos la Formula del Rectangulo Compuesto con m_rec = 100
 %              puntos
 
-                m_rec=100;
+              
 
       %DIBUJOS
 %       --> Dibujamos la funcion f(x)= cos(-1 + x^2)  en un numero
@@ -187,6 +255,7 @@
 %           Dibujamos 100 puntos que seran la altura de cada uno de los
 %           Rectangulos que utilizaremos para obtener la Aproximacion a treves
 %           de la Formula del Rectangulo Compuesto
+               
                subplot(2,3,4)
                format short;
                n=m_rec;
@@ -219,6 +288,7 @@
 %           Dibujamos 100 puntos que seran la altura de cada uno de los
 %           Rectangulos que utilizaremos para obtener la Aproximacion a treves
 %           de la Formula del Rectangulo Compuesto
+               
                subplot(2,3,5)
                format short;
                n=m_rec;
@@ -251,6 +321,7 @@
 %           Dibujamos 100 puntos que seran la altura de cada uno de los
 %           Rectangulos que utilizaremos para obtener la Aproximacion a treves
 %           de la Formula del Rectangulo Compuesto
+               
                subplot(2,3,6)
                format short;
                n=m_rec;
@@ -295,7 +366,7 @@
                 formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
                 formula_Rectangulo_Compuesta_Medio_delta_cte=0;
                 rutina1;
-                % Obtenemos Aproximacion Formula Punto Extremo Izquierdo
+                % Obtenemos Aproximacion Formula Punto Extremo Derecho
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=1;
                 formula_Rectangulo_Medio=0;
@@ -303,7 +374,7 @@
                 formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
                 formula_Rectangulo_Compuesta_Medio_delta_cte=0;
                 rutina1;
-                % Obtenemos Aproximacion Formula Punto Extremo Izquierdo
+                % Obtenemos Aproximacion Formula Punto Medio 
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=0;
                 formula_Rectangulo_Medio=1;
@@ -323,7 +394,7 @@
                 rutina1;
 
 %       --> Calculamos Aproximacion a traves de la Formula Rectangulo
-%           Compuesta Izquierda con m=100 puntos deltaX constante
+%           Compuesta Derecho con m=100 puntos deltaX constante
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=0;
                 formula_Rectangulo_Medio=0; 
@@ -333,7 +404,7 @@
                 rutina1;
 
 %       --> Calculamos Aproximacion a traves de la Formula Rectangulo
-%           Compuesta Izquierda con m=100 puntos deltaX constante
+%           Compuesta Medio con m=100 puntos deltaX constante
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=0;
                 formula_Rectangulo_Medio=0; 
@@ -359,7 +430,7 @@ fprintf('...\n');
 %  puntos para la Aproximacion. Para comparar la calidad de la Aproximacion
 %  utilizaremos la Formula del Trapecio Compuesta para m_trap = 100 puntos.
 
-                m_trap=100;
+                
 
       %DIBUJOS       
 %       --> Dibujamos Trapecio Compuesto       
@@ -396,6 +467,7 @@ fprintf('...\n');
                hold on;
   
 %       --> Dibujamos Trapecio
+               
                subplot(1,2,2)
                a_trap=area([a b],[subs(f,x,a) subs(f,x,b)]);
                a_trap.FaceColor = [0.2 0.6 0.5];
@@ -492,7 +564,7 @@ fprintf('...\n');
 %  puntos para la Aproximacion. Para comparar la calidad de la Aproximacion
 %  utilizaremos la Formula de Simpson 1/3 Compuesta para m_trap = 100 puntos.
 
-                m_simp=100;
+              
 
       %DIBUJOS       
 %       --> Dibujamos Simpson 1/3 Compuesto       
@@ -544,7 +616,7 @@ fprintf('...\n');
 
                               
                 end   
-                scatter(X1,simp_F,40,'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+                scatter(X1_simp,simp_F,40,'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
                 grid on;
                 hold on;
 
@@ -618,8 +690,105 @@ fprintf('...\n');
             formula_Simpson_Compuesta_delta_cte=0;
 
 fprintf('Fin Simpson 1/3');
-clc;
+
 %FIN APARTADO c)
+clc;
+format short;
+Integral_rec=double(I_rec);
+Integral_trap=double(I_trap);
+Integral_simp=double(I_simp);
+
+% ESCRIBIMOS RESULTADOS POR EN FICHERO resultados.txt          
+   fileID=fopen('resultados.txt','w');
+   fprintf(fileID,'-----------------------------------------\n');
+   fprintf(fileID,'DATOS DEL PROBLEMA\n');
+   fprintf(fileID,'\n');
+   fprintf(fileID,'---> f(x) = %s\n',char(f));
+   fprintf(fileID,'---> [a,b] = [%d,%d]\n',a,b);
+   fprintf(fileID,'\n');
+   fprintf(fileID,'---> n = %d\n',n);
+   fprintf(fileID,'-----------------------------------------\n');
+   fprintf(fileID,'RESULTADOS\n');
+   fprintf(fileID,'\n');
+   fprintf(fileID,'\n');
+   fprintf(fileID,'          (NOTA: los errores se calculan comparando con resultado funcion trap() 1.000 puntos\n');
+   fprintf(fileID,'          (       el valor que arroja la funcion trap() para 1.000 puntos se tomara como el\n');
+   fprintf(fileID,'          (       valor analitico de la integral\n');
+   fprintf(fileID,'\n');
+   aux1=double(I_trap(5));
+   fprintf(fileID,'==========>     FUNCION trapz(x,f) (1000 puntos) VALOR ANALITICO INTEGRAL;         I = %d     <==========\n',aux1);
+   fprintf(fileID,'\n');
+   fprintf(fileID,'---> FAMILIA NEWTON-COTES\n');
+   fprintf(fileID,'\n');
+   fprintf(fileID,'--------> CONSTANTE (1 punto): FORMULA RECTANGULO');
+   fprintf(fileID,'\n');
+   aux1=double(I_rec(1));
+   fprintf(fileID,'--------------> RECTANGULO IZQUIERDO (1 punto)                            ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_rec(1)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_rec(2));
+   fprintf(fileID,'--------------> RECTANGULO DERECHO (1 punto)                              ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_rec(2)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_rec(3));
+   fprintf(fileID,'--------------> RECTANGULO MEDIO (1 punto)                                ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_rec(3)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_rec(4));
+   fprintf(fileID,'--------------> RECTANGULO COMPUESTO IZQUIERDO delta=cte (100 puntos)     ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_rec(4)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_rec(5));
+   fprintf(fileID,'--------------> RECTANGULO COMPUESTO DERECHO delta=cte (100 puntos)       ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_rec(5)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_rec(6));
+   fprintf(fileID,'--------------> RECTANGULO COMPUESTO MEDIO delta=cte (100 puntos)         ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_rec(6)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   fprintf(fileID,'\n');
+   fprintf(fileID,'--------> LINEAL (2 puntos): FORMULA TRAPECIO');
+   fprintf(fileID,'\n');
+   aux1=double(I_trap(1));
+   fprintf(fileID,'--------------> TRAPECIO (2 puntos)                                       ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_trap(1)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_trap(2));
+   fprintf(fileID,'--------------> TRAPECIO COMPUESTO delta=cte (100 puntos)                 ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_trap(2)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_trap(3));
+   fprintf(fileID,'--------------> FUNCION trapz(x,f) (2 puntos)                             ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_trap(3)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   aux1=double(I_trap(4));
+   fprintf(fileID,'--------------> FUNCION trapz(x,f) (100 puntos)                           ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_trap(1)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   fprintf(fileID,'\n');
+   fprintf(fileID,'--------> PARABOLICO (3 puntos): FORMULA SIMPSON 1/3');
+   fprintf(fileID,'\n'); 
+   aux1=double(I_simp(1));
+   fprintf(fileID,'--------------> SIMPSON 1/3 (3 puntos)                                    ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_simp(1)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n'); 
+   aux1=double(I_simp(2));
+   fprintf(fileID,'--------------> SIMPSON 1/3 COMPUESTO delta=cte (100 puntos)              ===> I = %s\n',aux1);
+   aux1=double(abs(I_trap(5)-I_simp(2)));
+   fprintf(fileID,'--------------> ERROR COMETIDO                                            ===> E = %s\n',aux1);
+   fprintf(fileID,'\n');
+   fprintf(fileID,'---> FAMILIA CUADRATURA GAUSSIANA: Quizas las veamos en alguna practica posterior\n');
 
 % MOSTRAMOS RESULTADOS POR VENTANA DE COMANDOS          
    
@@ -635,8 +804,8 @@ clc;
    fprintf('RESULTADOS\n');
    fprintf('\n');
    fprintf('\n');
-   fprintf('          (NOTA: los errores se calculan comparando con resultado funcion trap() 10.000 puntos\n');
-   fprintf('          (       el valor que arroja la funci?n trap() para 10.000 puntos se tomara como el\n');
+   fprintf('          (NOTA: los errores se calculan comparando con resultado funcion trap() 1.000 puntos\n');
+   fprintf('          (       el valor que arroja la funcion trap() para 1.000 puntos se tomara como el\n');
    fprintf('          (       valor analitico de la integral\n');
    fprintf('\n');
    fprintf('--------------> FUNCION trapz(x,f) (1000 puntos) VALOR ANALITICO INTEGRAL ===> I = ');
@@ -703,7 +872,7 @@ clc;
    disp(double(I_trap(4)));
    fprintf('\n');
    fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
-   disp(double(abs(I_trap(5)-I_trap(1))));
+   disp(double(abs(I_trap(5)-I_trap(4))));
    fprintf('\n');
    fprintf('--------> PARABOLICO (3 puntos): FORMULA SIMPSON 1/3');
    fprintf('\n'); 
@@ -763,6 +932,15 @@ clc;
     clear X2;
     clear X3;
     clear X4;
+    clear aux1;
+    clear fileID;
+    clear ans;
+    clear I_rec;
+    clear I_trap;
+    clear I_simp;
+    clear n;
+
+    
     
 
 

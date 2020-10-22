@@ -1,4 +1,61 @@
 -----------------------------------------
 DATOS DEL PROBLEMA
 
----> f(x) = 
+---> f(x) = cos(x^2 - 1)
+---> [a,b] = [0,6.283185e+00]
+
+---> n = 100
+-----------------------------------------
+RESULTADOS
+
+
+          (NOTA: los errores se calculan comparando con resultado funcion trap() 1.000 puntos
+          (       el valor que arroja la funcion trap() para 1.000 puntos se tomara como el
+          (       valor analitico de la integral
+
+==========>     FUNCION trapz(x,f) (1000 puntos) VALOR ANALITICO INTEGRAL;         I = 9.210527e-01     <==========
+
+---> FAMILIA NEWTON-COTES
+
+--------> CONSTANTE (1 punto): FORMULA RECTANGULO
+--------------> RECTANGULO IZQUIERDO (1 punto)                            ===> I = 3.394820e+00
+--------------> ERROR COMETIDO                                            ===> E = 2.473767e+00
+
+--------------> RECTANGULO DERECHO (1 punto)                              ===> I = 4.469868e+00
+--------------> ERROR COMETIDO                                            ===> E = 3.548815e+00
+
+--------------> RECTANGULO MEDIO (1 punto)                                ===> I = -5.339507e+00
+--------------> ERROR COMETIDO                                            ===> E = 6.260560e+00
+
+--------------> RECTANGULO COMPUESTO IZQUIERDO delta=cte (100 puntos)     ===> I = 9.126573e-01
+--------------> ERROR COMETIDO                                            ===> E = 8.395488e-03
+
+--------------> RECTANGULO COMPUESTO DERECHO delta=cte (100 puntos)       ===> I = 9.235163e-01
+--------------> ERROR COMETIDO                                            ===> E = 2.463589e-03
+
+--------------> RECTANGULO COMPUESTO MEDIO delta=cte (100 puntos)         ===> I = 9.225909e-01
+--------------> ERROR COMETIDO                                            ===> E = 1.538176e-03
+
+
+--------> LINEAL (2 puntos): FORMULA TRAPECIO
+--------------> TRAPECIO (2 puntos)                                       ===> I = 3.932344e+00
+--------------> ERROR COMETIDO                                            ===> E = 3.011291e+00
+
+--------------> TRAPECIO COMPUESTO delta=cte (100 puntos)                 ===> I = 9.180868e-01
+--------------> ERROR COMETIDO                                            ===> E = 2.965950e-03
+
+--------------> FUNCION trapz(x,f) (2 puntos)                             ===> I = 3.932344e+00
+--------------> ERROR COMETIDO                                            ===> E = 3.011291e+00
+
+--------------> FUNCION trapz(x,f) (100 puntos)                           ===> I = 9.180868e-01
+--------------> ERROR COMETIDO                                            ===> E = 3.011291e+00
+
+
+--------> PARABOLICO (3 puntos): FORMULA SIMPSON 1/3
+--------------> SIMPSON 1/3 (3 puntos)                                    ===> I = -2.248890e+00
+--------------> ERROR COMETIDO                                            ===> E = 3.169943e+00
+
+--------------> SIMPSON 1/3 COMPUESTO delta=cte (100 puntos)              ===> I = 1.750557e+00
+--------------> ERROR COMETIDO                                            ===> E = 8.295046e-01
+
+---> FAMILIA CUADRATURA GAUSSIANA: Quizas las veamos en alguna practica posterior
