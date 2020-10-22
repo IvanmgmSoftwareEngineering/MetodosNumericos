@@ -66,6 +66,15 @@
         elseif (formula_Trapecio_Compuesta_delta_cte==1)
             %-- 100 puntos libre eleccion
             X=X1;
+        elseif (funcion_trapz_2==1)
+            %-- 2 puntos libre eleccion
+            X=[a b];
+        elseif (funcion_trapz_100==1)
+            %-- 100 puntos libre eleccion
+            X=linspace(a,b,100);
+        elseif (funcion_trapz_1000==1)
+            %-- 100 puntos libre eleccion
+            X=linspace(a,b,1000);
         %-- Puntos Discretos para Simpson 1/3
         elseif (formula_Simpson==1)
             %-- 3 puntos por definicion
@@ -104,6 +113,18 @@
             for i=1:m_trap-1  
                 I_trap(2) = I_trap(2) + (abs(trap_F(i))+abs(trap_F(i+1)))*1/2*deltaX;
             end
+        elseif (funcion_trapz_2==1)
+            %-- Formula Trapecio Compuesta delta=cte 2 puntos
+            I_trap(3)=trapz([a b],[abs(subs(f,x,a)) abs(subs(f,x,b))]);
+        elseif (funcion_trapz_100==1)
+            %-- Formula Trapecio Compuesta delta=cte 100 puntos
+            I_trap(4)=trapz(X,abs(trap_F));
+        elseif (funcion_trapz_1000==1)
+            %-- Formula Trapecio Compuesta delta=cte 1000 puntos
+            for i=1:1000
+                F_aux(i)=abs(subs(f,x,X(i)));
+            end
+            I_trap(5)=trapz(X,F_aux);
         %-- Formulas Simpson 1/3
         elseif (formula_Simpson==1)
             %-- Formula Simpson 1/3

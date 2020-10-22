@@ -9,29 +9,20 @@
 %   ARGUMENTO 2: X   --> Vector fila con n puntos discretos equiespaciados
 %
 % SALIDA:        Li --> Vector con los valores del Polinomio en Base de Lagrange                  
-%                        Li = [Lo, L1, ..., Ln]. Recordar que c?mo en
+%                        Li = [Lo, L1, ..., Ln] en Simbolico. Recordar que como en
 %                        Matlab se empizan a indexar los vectores en 1,
-%                        entonces sustituiremos el sub?ndice 0 por 1 y el
-%                        sub?ndice n por n+1
+%                        entonces sustituiremos el subindice 0 por 1 y el
+%                        subundice n por n+1
 %                             
 %
 % ERRORES:
 %   ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
 % 
-% DESCRIPCION: Esta funcion calcula cada uno de los Polinomios en Base de Lagrange (habr? tantos como puntos discretos n) y 
-%              los almacena en diferentes filas de un vector columna [Lo;L1;...;Ln], despues particulariza cada
-%              uno de los polinomios obtenidos antes en cada uno de los n
-%              puntos discretos, obteniendo asi una matriz. Notar que los
-%              pasos anteriormente citados ("...calcula cada uno de los 
-%              Polinomios en Base de Lagrange" y "particulariza..."), 
-%              no se llevan a acabo propiamente dicho en esta funci?n. Esta
-%              funcion no utiliza Matlab Simbolico por lo que haremos uso
-%              de la definicion de Polinomios en Base de Lagrange para obtener sus
-%              valores. Por lo dicho antes, esta funcion solo necesita como
-%              Argumento de entrada el numero de puntos discretos n.
+% DESCRIPCION: Esta funcion calcula cada uno de los Polinomios en Base de Lagrange  
+%              
 %-------------------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------------------
-%Empieza funci?n
+%Empieza funcion
 
 function Li = PPBL(n,X)
     %Control de Errores en Argumentos de Entrada
@@ -44,19 +35,25 @@ function Li = PPBL(n,X)
 %-------------------------------------------------------
     %Empieza funcionalidad funcion
         syms x;
-        sim L
-        for i = 1:n+1 
-            
+        for i = 1:n     
             L(i)=sym('1');
-            for j = 1:n+1
+            for j = 1:n
                 if(i~=j)
-                L(i) = L(i) * (x - X(j))/(X(i)-X(j));  
+                    L(i) = L(i) * (x - X(j))/(X(i)-X(j));  
                 end
             end
         end
         Li = L;
+        
+%       for i = 1:n 
+%           for j = 1:n                
+%               Laux(i,j)=subs(L(i),x,X(j));                 
+%           end
+%       end
+        
+        %spy(Laux,'+',20);
 end
 %   FIN funcionalidad funcion
 %-------------------------------------------------------
 %------------------------------------------------------- 
-%FIN funci?n
+%FIN funcion

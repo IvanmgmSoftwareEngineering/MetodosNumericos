@@ -337,6 +337,9 @@
 %       --> Calculamos Aproximacion a traves de la Formula Trapecio       
                 formula_Trapecio=1;
                 formula_Trapecio_Compuesta_delta_cte=0;
+                funcion_trapz_2=0;
+                funcion_trapz_100=0;
+                funcion_trapz_1000=0;
                 rutina1;
                 
 
@@ -344,10 +347,42 @@
 %           Compuesta con m=100 puntos
                 formula_Trapecio=0;
                 formula_Trapecio_Compuesta_delta_cte=1;
+                funcion_trapz_2=0;
+                funcion_trapz_100=0;
+                funcion_trapz_1000=0;
+                rutina1;
+
+%       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 2 puntos 
+%           
+                formula_Trapecio=0;
+                formula_Trapecio_Compuesta_delta_cte=0;
+                funcion_trapz_2=1;
+                funcion_trapz_100=1;
+                funcion_trapz_1000=0;
+                rutina1;
+%       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 100 puntos 
+%           
+                formula_Trapecio=0;
+                formula_Trapecio_Compuesta_delta_cte=0;
+                funcion_trapz_2=0;
+                funcion_trapz_100=1;
+                funcion_trapz_1000=0;
+                rutina1;
+
+%       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 1000 puntos 
+%           
+                formula_Trapecio=0;
+                formula_Trapecio_Compuesta_delta_cte=0;
+                funcion_trapz_2=0;
+                funcion_trapz_100=0;
+                funcion_trapz_1000=1;
                 rutina1;
 
             formula_Trapecio=0;
             formula_Trapecio_Compuesta_delta_cte=0;
+            funcion_trapz_2=0;
+            funcion_trapz_100=0;
+            funcion_trapz_1000=0;
 
 %FIN APARTADO b)
 
@@ -375,7 +410,7 @@
                figure(4);
                subplot(1,2,1);
 
-               for i=2:n-1
+               for i=2
                     %Llamamos PPBL.m para obtener los Polinomios en Base de
                     %Lagrange del subintervalo [x(i-1) x(i+1)] con 3 puntos
                     %equiespaciados x(i-1), x(i) y x(i+1)
@@ -534,6 +569,15 @@
    fprintf('\n');
    fprintf('--------------> TRAPECIO COMPUESTO delta=cte (100 puntos)      ===> I = ');
    disp(double(I_trap(2)));
+   fprintf('\n');
+   fprintf('--------------> FUNCION trapz(x,f) (2 puntos)                ===> I = ');
+   disp(double(I_trap(3)));
+   fprintf('\n');
+   fprintf('--------------> FUNCION trapz(x,f) (100 puntos)                ===> I = ');
+   disp(double(I_trap(4)));
+   fprintf('\n');
+   fprintf('--------------> FUNCION trapz(x,f) (1000 puntos)                ===> I = ');
+   disp(double(I_trap(5)));
    fprintf('\n');
    fprintf('--------> PARABOLICO (3 puntos): FORMULA SIMPSON 1/3');
    fprintf('\n');

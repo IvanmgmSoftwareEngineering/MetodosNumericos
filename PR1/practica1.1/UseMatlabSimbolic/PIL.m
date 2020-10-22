@@ -8,55 +8,47 @@
 %   ARGUMENTO 1: n   --> Numero Puntos Discretos del Intervalo Cerrado
 %   ARGUMENTO 2: X   --> Vector fila con n puntos discretos equiespaciados
 %   ARGUMENTO 4: L   --> Matriz Polinomios en Base de Lagrange 
-%  *ARGUMENTO 5: f   --> Funcion que queremos aproximar. El * indica que
-%                        no es un Argumento de entrada propiamente dicho porque 
-%                        no se le pasa como Argumento de entrada a la funcion PIL.m.
-%                        La intencion es que mas adelante, cuando hagamos uso
-%                        de Matlab Simbilico, esta funcion f que deseamos aproximar
-%                        sea un Argumento de entrada de la funcion PIL.m.
+%   ARGUMENTO 5: f   --> Funcion que queremos aproximar.
 %  
 %
-% SALIDA:        In  --> Matriz con los valores del Polinomio Interpolador de Lagrange
-%                        particularizados en cada punto del Intervalo Cerrado
-%                        In = [In(xo),In(x1),...,In(xn)]
+% SALIDA:        p   --> Polinomio Interpolador de Lagrange
 %                             
 %
-% ERRORES: -
+% ERRORES:
+%   ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
 %   
 % 
-% DESCRIPCION: Esta funcion calcula el Polinomio Interpolador de Lagrange, despues particulariza 
-%              en cada uno de los n puntos discretos del Intervalo Cerrado,
-%              ,obteniendo asi un vector fila. Notar que los
-%              pasos anteriormente citados ("...calcula el 
-%              Polinomio Interpolador de Lagrange" y "particulariza..."), 
-%              no se llevan a acabo propiamente dicho en esta funcion. Esta
-%              funcion no utiliza Matlab Simbolico por lo que haremos uso
-%              de la definicion de Polinomio Interpolador de Lagrange para obtener sus
-%              valores.
+% DESCRIPCION: Esta funcion calcula el Polinomio Interpolador de Lagrange 
+%             
 %-------------------------------------------------------------------------------------------------
 %-------------------------------------------------------------------------------------------------
-%Empieza funci?n
+%Empieza funcion
 
 
-function I = PIL(n,X,L)
+function p = PIL(n,X,L,f)
+
+    %Control de Errores en Argumentos de Entrada
+        %ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
+            if (n <= 1)
+                error ('El numero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
+            end
+    %FIN Control de Errores en Argumentos de Entrada
+%-------------------------------------------------------
+%-------------------------------------------------------
     %Empieza funcionalidad funcion
 
         
         
-        %Calculamos el Polinomio Interpolador de Lagrange y
-        %particularizamos en cada uno de los puntos discretos
-        
-            F=zeros(1,n);
-            
-            for i=1:n
-                for j=1:n
-                    if (i==j)
-                        F(i)=L(i,j)*(exp(-X(i)) + cos(4*X(i)/pi));
-                    end
-                end
+        %Calculamos el Polinomio Interpolador de Lagrange 
+            syms x;
+            inter=sym('0');
+            for i=1:n    
+                 f_aux=subs(f,x,X(i));
+                 inter=inter + f_aux*L(i) ;                                   
             end 
             
-            I=F; 
+            p=inter;
+         
      %FIN funcionalidad funcion
 end
-%FIN funci?n
+%FIN funcion

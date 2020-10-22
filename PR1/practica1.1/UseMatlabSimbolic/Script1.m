@@ -1,197 +1,188 @@
-%% PRACTICA 1
+%% EJERCICIOS PROPUESTOS: Polinomios en Base de Lagrange (PPBL) y Polinomio Interpolador de Lagrange (PIL)
+%  DESCRIPCION: Calculo de los PPBL, PIL, Error y Cota Error
 %  AUTOR: IVAN MARTIN GOMEZ
 
-%% PRACTICA 1.1: Polinomios en Base de Lagrange (PPBL) y Polinomio Interpolador de Lagrange (PIL)
-%
-%  Uso: Ejecute desde la Ventana de Comandos el siguiente mandato: Script1.m 
-%        
+%% Ejercicio 4: 
+%  Datos: 
+%       --> Funcion que queremos Aproximar:         f(x) =cos(4*x/pi)+exp(-x)
+%       
+%       --> Intervalo Cerrado:                      [0,2]
+%       --> Numero puntos utilizados Aproximacion:  Apartado a)n=3 [0 0.6 2]
+%                                                   Apartado b)n=4 [0 0.6 1.4 2]
+%  nota: Solucion oficial:          
+%        Solucion obtenida por mi:  
+
+
+%       --> Especificamos Funcion f(x)= cos(5*x +2)*x^2 que queremos 
+%           Aproximar mediante el Polinomio
+%           Interpolador de Lagrange
+                close all;
+                clear all;
+                clc;
+                syms x;               
+                f = cos(4*x/pi)+exp(-x);
+                
 %       --> Especificamos el intervalo cerrado [a,b].
 %               
                 a=0;
                 b=2;
                 
-%       --> Especificamos Funcion f(x)= e^(-x) + cos(4x/pi) que queremos 
-%           Aproximar mediante el Polinomio
-%           Interpolador de Lagrange
-                syms x y;
+%       --> Especificamos el numero de puntos discretos que utilizaremos en
+%           la Aproximacion
+%               
+                n=4;
                 
-                f = exp(-x) + cos(4*x/pi);
+%       
 
-%       --> Especificamos el numero de puntos n discretos que utilizaremos
-%           para obtener el Polinomio Interpolador de Lagrange.
-%           Haremos un estudio para varios valores de n.
-%           Notar que en la teoria el valor de n NO se corresponde exactamente
-%           con el numero de puntos(en teoria n = numero Puntos - 1),
-%           pero en nuestro caso debido a las caracteristicas internas de
-%           Matlab(Matlab indexa la primera posicion de los vectores por el valor 1 y no el cero),
-%           el valor que toma n SI se corresponde con el numero de puntos 
-%           (en la practica n = numero de puntos).
-%
-%       --> Aclaraciones: Lo que hace Matlab para dibujar es tomar dos
-%           puntos vecinos(entre medias no hay ningun otro punto) y unirlos
-%           mediante una recta. Al dibujar la funcion que queremos aproximar le
-%           decimos que dibuje un numero suficientemente grande de puntos (ej:1000) como
-%           para que a la vista del ojo humano, la linea recta sea lo
-%           suficientemente pequena como para no distinguirla, esto dota de curvatura 
-%           al dibujo en el caso de ser la funcion que queremos aproximar una
-%           funcion con cierta curvatura.
-
-%       --> Lo que se pretende con las Aproximaciones es utilizar un numero
-%           mucho menor de puntos para obtener resultados 'suficientemente' buenos
-%           como para poder utilizar la Aproximacion en lugar de la funcion
-%           que estamos aproximando. De esta forma pasamos de evaluar la
-%           funcion real, por ejemplo, en 1000 puntos, a evaluar la Aproximacion de la
-%           funcion real en solo 5 puntos obteniendo un error que, segun el
-%           contexto, sea lo suficientemente pequeno como para justificar la
-%           el uso de Aproximacion en sustitucion al uso de la funcion real
-%           por el Ahorro computacional que supone pasar de evaluar 1000
-%           puntos en la funcion real a evaluar solo 5 puntos en la
-%           Aproximacion. Cuanto mas exigente sea el problema particular que estamos
-%           tratando menor sera el Error que se permita cometer y en
-%           consecuencia necesitaremos aproximaciones mejores, lo que trae
-%           coomo consecuencia la utilizacion de un mayor n?mero de
-%           puntos para obtener una Aproximacion lo suficientemente buena,
-%           y esto conllevara un mayor coste computacional frente a una
-%           Aproximacion que haga uso de un menor numero de puntos.
-%
-%       --> En este caso al no estar utilizando Matlab simbolico, no tiene
-%           sentido calcular el Error cometido ya que los valores del Polinomio
-%           de Interprlacion de Lagrange particularizados en los puntos
-%           discretos del Intervalo cerrado [a,b] toman el mismo valor que la
-%           funcion f(x) que estamos aproximando, por lo que el error en esos
-%           puntos da como resultado cero, lo interesante del error es
-%           estudiarlo en puntos difrentes a los puntos discretos que hemos
-%           utilizado para obtener la aproximacion a traves del Polinimo de
-%           Interpolacion de Lagrange. Mas adelante, cuando obtengamos una
-%           expresion explicita en funcion de una variable independiente 'x'
-%           para los Polinomios en Base de Lagrange que a su vez seran
-%           utilizados para obtener una expresion explicita en funcion de una
-%           variable independiente 'x' para el Polinomio de Interpolaci?n de
-%           Lagrang(lo anterior se hace con Matlab Simbolico), 
-%           podremos haciendo uso de dicha expresion, sustituir en ella todos y
-%           cada uno de los puntos que hemos utilizado para representar la
-%           funcion f(x), y de esta forma calculando el |f(x) - I(x)| podremos
-%           obtener el error cometido en cada uno de los puntos, calculando el
-%           maximo de todos ellos obtendremos la Cota de Error.
-%        
-%           
-%   
-%       CASO 0) Dibujamos la funcion f(x)= e^(-x) + cos(4x/pi) en un n?mero
-%               suficientemente grande de puntos del Intervalo Cerrado [a,b] para
-%               utilizarlo como modelo de la funcion real en dicho
-%               intervalo.
-%                format long;
-%                n=1000;
-%                X0=linspace(a,b,n);
-%                F=zeros(1,n);
-%                for i=1:n
-%                 F(i)=exp(-X0(i)) + cos(4*X0(i)/pi);
-%                end
-%                figure(1);
-%                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
-%                title('Funcion y Polinomio Interpolador Lagrange');
-%                xlabel('x');
-%                axis([a b -1 2.5]);
-%                grid on;
-%                hold on;
+%      CASO 0)Dibujamos la funcion f(x)= cos(x) en un numero
+%             suficientemente grande de puntos del Intervalo Cerrado [0,pi/2] 
+%             para utilizarlo como modelo de la funcion real en dicho              
+%             intervalo.
+               
+               format long;
+               n0=1000;
+               X0=linspace(a,b,n0);
+               F=zeros(1,n0);
+               for i=1:n0
+                F(i)=subs(f,x,X0(i));
+               end
+               figure(1);
+               subplot(1,2,1);
+               plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
+               title('Funcion y Polinomio Interpolador Lagrange');
+               xlabel('x');
+               axis([a b -0.75 2.1]);
+               grid on;
+               hold on;
          
-% %       CASO 1) Dos puntos ==> n = 2
-% %
-                  n=2;
+%        CASO 1) Cuatro puntos ==> n = 4 [0,pi/6,pi/3,pi/2]
+
                   rutina1; 
-%                %Calculo el Error cometido |f(x)-I(x)|
-%                 F=zeros(1,n);
-%                 for i=1:n
-%                     F(i)=exp(-X(i)) + cos(4*X(i)/pi);
-%                 end
-%                 E=abs(F - I);
-%                 CotaError1=max(E)
-%                 
-%                %Dibujo
-%                 plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21);
-%                
-%                
-%        
-% %       CASO 2) Tres puntos ==> n = 3
-% 
-%                n=3;
-%                rutina1; 
-%                %Calculo el Error cometido |f(x)-I(x)|
-%                 F=zeros(1,n);
-%                 for i=1:n
-%                     F(i)=exp(-X(i)) + cos(4*X(i)/pi);
-%                 end
-%                 E=abs(F - I);
-%                 CotaError2=max(E)
-%                 
-%                %Dibujo
-%                plot(X,I,'MarkerEdgeColor',[0.3 0.3 0.3],'LineWidth',2,'Marker','*','MarkerSize',18,'MarkerFaceColor',[0.3 0.3 0.3]); 
-%                
-% %       CASO 3) Cuatro puntos ==> n = 4
-% 
-%                n=4;
-%                rutina1; 
-%                %Calculo el Error cometido |f(x)-I(x)|
-%                 F=zeros(1,n);
-%                 for i=1:n
-%                     F(i)=exp(-X(i)) + cos(4*X(i)/pi);
-%                 end
-%                 E=abs(F - I);
-%                 CotaError3=max(E)
-%                 
-%                %Dibujo
-%                plot(X,I,'MarkerEdgeColor',[0.4 0.4 0.4],'LineWidth',2,'Marker','*','MarkerSize',15,'MarkerFaceColor',[0.4 0.4 0.4]); 
-% 
-% %       CASO 4) Cinco puntos ==> n = 5
-% 
-%                n=5;
-%                rutina1;
-%                %Calculo el Error cometido |f(x)-I(x)|
-%                 F=zeros(1,n);
-%                 for i=1:n
-%                     F(i)=exp(-X(i)) + cos(4*X(i)/pi);
-%                 end
-%                 E=abs(F - I);
-%                 CotaError3=max(E)
-%                 
-%                %Dibujo
-%                plot(X,I,'MarkerEdgeColor',[0.5 0.5 0.5],'LineWidth',2,'Marker','*','MarkerSize',12,'MarkerFaceColor',[0.5 0.5 0.5]); 
-% 
-% %       CASO 5) Seis puntos ==> n = 6
-% 
-%                n=6;
-%                rutina1; 
-%                %Calculo el Error cometido |f(x)-I(x)|
-%                 F=zeros(1,n);
-%                 for i=1:n
-%                     F(i)=exp(-X(i)) + cos(4*X(i)/pi);
-%                 end
-%                 E=abs(F - I);
-%                 CotaError5=max(E)
-%                 
-%                %Dibujo
-%                plot(X,I,'MarkerEdgeColor',[0.6 0.6 0.6],'LineWidth',2,'Marker','*','MarkerSize',9,'MarkerFaceColor',[0.6 0.6 0.6]); 
-%  
-% %       CASO 6) Siete puntos ==> n = 7
-% 
-%                n=7;
-%                rutina1;  
-%                %Calculo el Error cometido |f(x)-I(x)|
-%                 F=zeros(1,n);
-%                 for i=1:n
-%                     F(i)=exp(-X(i)) + cos(4*X(i)/pi);
-%                 end
-%                 E=abs(F - I);
-%                 CotaError6=max(E)
-%                 
-%                %Dibujo
-%                plot(X,I,'MarkerEdgeColor',[0.7 0.7 0.7],'LineWidth',2,'Marker','*','MarkerSize',6,'MarkerFaceColor',[0.7 0.7 0.7]); 
-%                legend('f(x) = exp(-x) + cos(4x/pi)','Aproximacion n=2','Aproximacion n=3',...
-%                'Aproximacion n=4','Aproximacion n=5','Aproximacion n=6','Aproximacion n=7'); 
-%                lgd = legend;
-%                lgd.FontSize = 18;
-%            
-% %        
+  
+                % Dibujo Polinomio Interpolador de Lagrange sobre la misma
+                % grafica que la funcion f(x)
+
+
+                    for i=1:n
+                        I(i)=subs(p,x,X(i));
+                    end
+                    plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21);               
+                    legend('f(x) = cos(x)','Aproximacion n=4'); 
+                    lgd = legend;
+                    lgd.FontSize = 18;
+                    
+                 % Dibujo la Funcion de Error E(x) y la Cota de Error en la
+                 % misma grafica
+                   
+                   n0=1000;
+                   X0=linspace(a,b,n0);
+                   E=zeros(1,n0);
+                   C=zeros(1,n0);
+                   for i=1:n0
+                        E(i)=abs(subs(error,x,X0(i)));
+                        C(i)=double(cotaError);
+                   end
+                   
+                   subplot(1,2,2);
+                   plot(X0,E,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2);
+                   title('Error y Cota de Error');
+                   xlabel('x');
+                   if(n==4)
+                   axis([a b 0 0.03]);
+                   elseif(n==3)
+                   axis([a b 0 0.25]);
+                   end
+                   grid on;
+                   hold on;
+                   
+                   plot(X0,C,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);               
+                   legend('E(x)','Cota de Error'); 
+                   lgd = legend;
+                   lgd.FontSize = 18;
+                   
+   % Muestor por Ventada de Comandos los datos del problema y los
+   % resultados mas relevantes:
+   format short;
+   fprintf('-----------------------------------------\n');
+   fprintf('DATOS DEL PROBLEMA\n');
+   fprintf('\n');
+   fprintf('---> f(x) = ');
+   disp(f);
+   fprintf('---> [a,b] = [%d,%d]\n',a,b);
+   fprintf('\n');
+   fprintf('---> n = %d\n',n);
+   fprintf('-----------------------------------------\n');
+   fprintf('RESULTADOS\n');
+   fprintf('\n');
+   fprintf('---> Puntos Discretos\n');
+   for i=1:n
+   fprintf('--------> x%i = ',i);
+   disp(X(i));
+   end
+   fprintf('\n');
+   fprintf('---> Polinomios en Base de Lagrange (PPBL)\n');
+   for i=1:n
+   fprintf('--------> L%i(x) = ',i);
+   disp(collect(L(i)));
+   end
+   fprintf('\n');
+   fprintf('---> Polinomio Interpolador de Lagrange (PIL)\n');
+   fprintf('--------> p%i(x) = ',n);
+   disp(collect(p));
+   fprintf('\n');
+   fprintf('---> ERROR\n');
+   fprintf('--------> E(x) = ');
+   disp(collect(error));
+   fprintf('-------------> g(x) = ');
+   disp(collect(g));
+   fprintf('------------------> Extremos del Intervalo\n');
+   fprintf('---------------------> g(%i) = ', a);
+   disp(double(subs(g,x,a)));
+   fprintf('---------------------> g(%i) = ', b);
+   disp(double(subs(g,x,b)));
+   fprintf('------------------> ?Hay Puntos Estacionarios en g(x)? ');
+   if(length(abs_gr)>0)
+   disp(' --> YES')
+   for i=1:length(abs_gr)
+   fprintf('----------------------> Punto Estacionario %i : |g(r%i)| = ',i,i);  
+   disp(double(abs_gr(i)))
+   end
+   else
+   disp(' --> NO')
+   end
+   fprintf('------------------> ?Hay puntos No Diferenciables en g(x)? ');
+   disp(' --> NO')
+   fprintf('\n');
+   fprintf('-------------> h(x) = ');
+   disp(collect(h));
+   fprintf('------------------> Extremos del Intervalo\n');
+   fprintf('---------------------> h(%i) = ', a);
+   disp(double(subs(h,x,a)));
+   fprintf('---------------------> h(%i) = ', b);
+   disp(double(subs(h,x,b)));
+   fprintf('------------------> ?Hay Puntos Estacionarios en h(x)? ');
+   if(length(abs_hr)>0)
+   disp(' --> YES')
+   for i=1:length(abs_hr)
+   fprintf('----------------------> Punto Estacionario %i : |h(r%i)| = ',i,i);  
+   disp(double(abs_hr(i)))
+   end
+   else
+   disp(' --> NO')
+   end
+   fprintf('------------------> ?Hay puntos No Diferenciables en h(x)? ');
+   disp(' --> NO')
+   fprintf('\n');
+   fprintf('---> COTA ERROR = ');
+   fprintf('\n');
+   fprintf('------> |E(x)| =< ');
+   disp(double(cotaError));
+   fprintf('FIN-----------------------------------------------\n');
+   
+   
+   
+   
+   
 
 
 

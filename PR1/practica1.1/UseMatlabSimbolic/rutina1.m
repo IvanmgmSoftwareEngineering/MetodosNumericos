@@ -34,7 +34,7 @@
         
     %ERROR 2: Se comprueba que n > 0, en caso contrario se devuelve error.
             if (n <= 0)
-                error ('El n?mero de puntos para calcular los Polinomios en Base de Lagrange debe ser mayor que cero')
+                error ('El numero de puntos para calcular los Polinomios en Base de Lagrange debe ser mayor que cero')
             end
 
 %FIN Control de Errores en Argumentos de Entrada
@@ -44,8 +44,8 @@
 
     %Tomamos n Puntos Equiespaciados dentro del Intervalo Cerrado [a,b] y los
     %almacenamos en un vector fila llamado 'X'.
-
-        X=linspace(a,b,n);
+        X=[0 0.6 1.4 2];
+        %X=linspace(a,b,n);
 
     %Llamamos a la funcion PPBL.m para obtener los Polinomios en Base de
     %Lagrange
@@ -57,7 +57,16 @@
     %Llamamos a la funcion PIL.m para obtener el Polinomio Interpolador de
     %Lagrange
     
-%         I=PIL(n,X,L);
+        p=PIL(n,X,L,f);
+        
+                                           
+        
+        
+     %Llamamos a la funcion Error.m para obtener la expresion del Error y 
+     %la Cota de Error.
+        abs_gr=[];
+        abs_hr=[];
+        [error,cotaError,g,h,abs_gr,abs_hr]=Error(n,X,f);
     
         
 
