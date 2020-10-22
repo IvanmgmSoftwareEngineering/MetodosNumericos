@@ -33,15 +33,20 @@
 %                            Esta region coloreada representa el valor real
 %                            de la Integral.
 %   FIGURA 2:            --> Muestra los resultados de las Formulas del
-%                            Rectangulo
+%                            Rectangulo    
 %       SUBFIGURA 2.1:   --> Muestra los resultados de la Formula del
-%                            Rectangulo Compuesto delta=cte 100 puntos
-%       SUBFIGURA 2.2:   --> Muestra los resultados de la Formula del
 %                            Rectangulo Izquierdo
-%       SUBFIGURA 2.3:   --> Muestra los resultados de la Formula del
+%       SUBFIGURA 2.2:   --> Muestra los resultados de la Formula del
 %                            Rectangulo Derecho
-%       SUBFIGURA 2.4:   --> Muestra los resultados de la Formula del
+%       SUBFIGURA 2.3:   --> Muestra los resultados de la Formula del
 %                            Rectangulo Medio
+%       SUBFIGURA 2.4:   --> Muestra los resultados de la Formula del
+%                            Rectangulo Compuesto Izquierdo delta=cte 100 puntos
+%       SUBFIGURA 2.5:   --> Muestra los resultados de la Formula del
+%                            Rectangulo Compuesto Derecho delta=cte 100 puntos
+%       SUBFIGURA 2.6:   --> Muestra los resultados de la Formula del
+%                            Rectangulo Compuesto Medio delta=cte 100 puntos
+%
 %   FIGURA 3:            --> Muestra los resultados de las Formulas del
 %                            Trapecio
 %       SUBFIGURA 3.1:   --> Muestra los resultados de la Formula del
@@ -88,7 +93,8 @@
 %           suficientemente grande de puntos del Intervalo Cerrado [a,b] para
 %           utilizarlo como modelo de la funcion real en dicho
 %           intervalo.
-
+        fprintf('Ejecutando programa!(El tiempo de ejecucion de este programa es de 2-3 min. aprox. Hay que tener paciencia) \n');
+        fprintf('...\n');
                format short;
                n=1000;
                X0=linspace(a,b,n);
@@ -110,13 +116,78 @@
                grid on;
                hold on;
                
-%       --> Dibujamos Rectangulo Compuestos delta=cte     
+
+%       --> Dibujamos Formulas Simples Rectangulo (Izquierdo, Derecho, Medio) en la primera fila 
+               figure(2);
+               
+               %--> Dibujamos Rectangulo Izquierdo
+               
+               subplot(2,3,1)
+               a_rec_izq=area([a b],[subs(f,x,a),subs(f,x,a)]);
+               a_rec_izq.FaceColor = [0.2 0.6 0.5];
+               a_rec_izq.EdgeColor = [0.63 0.08 0.18];
+               grid on;
+               hold on;
+               plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
+               title('Rectangulo Izquierdo (1 punto)');
+               xlabel('x');
+               axis([a b -1.2 1.2]);
+               grid on;
+               hold on;
+
+               scatter(a,subs(f,x,a),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+               grid on;
+               hold on;
+
+%       --> Dibujamos Rectangulo Derecho
+               subplot(2,3,2)
+
+               a_rec_der=area([a b],[subs(f,x,b),subs(f,x,b)]);
+               a_rec_der.FaceColor = [0.2 0.6 0.5];
+               a_rec_der.EdgeColor = [0.63 0.08 0.18];
+               grid on;
+               hold on;
+               plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
+               title('Rectangulo Derecho (1 punto)');
+               xlabel('x');
+               axis([a b -1.2 1.2]);
+               grid on;
+               hold on;
+
+               scatter(b,subs(f,x,b),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+               grid on;
+               hold on;
+
+%       --> Dibujamos Rectangulo Medio
+               subplot(2,3,3);
+                
+               a_rec_medio=area([a b],[subs(f,x,(b-a)/2),subs(f,x,(b-a)/2)]);
+               a_rec_medio.FaceColor = [0.2 0.6 0.5];
+               a_rec_medio.EdgeColor = [0.63 0.08 0.18];
+               grid on;
+               hold on;
+               plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
+               title('Rectangulo Medio (1 punto)');
+               xlabel('x');
+               axis([a b -1.2 1.2]);
+               grid on;
+               hold on;
+
+               scatter((b-a)/2,subs(f,x,(b-a)/2),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+               grid on;
+               hold on;
+
+               
+
+
+
+
+
+%       --> Dibujamos Rectangulo Compuestos Izquierdo delta=cte     
 %           Dibujamos 100 puntos que seran la altura de cada uno de los
 %           Rectangulos que utilizaremos para obtener la Aproximacion a treves
 %           de la Formula del Rectangulo Compuesto
-
-               figure(2);
-               subplot(2,2,1)
+               subplot(2,3,4)
                format short;
                n=m_rec;
                X1=linspace(a,b,n);
@@ -138,69 +209,78 @@
                grid on;
                hold on;
                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
-               title('Rectangulo Compuesto 100 puntos');
+               title('Rectangulo Compuesto Izquierdo 100 puntos');
                xlabel('x');
                axis([a b -1.2 1.2]);
                grid on;
                hold on;
               
-%       --> Dibujamos Rectangulo Izquierdo
-               subplot(2,2,2)
+%       --> Dibujamos Rectangulo Compuestos Derecho delta=cte     
+%           Dibujamos 100 puntos que seran la altura de cada uno de los
+%           Rectangulos que utilizaremos para obtener la Aproximacion a treves
+%           de la Formula del Rectangulo Compuesto
+               subplot(2,3,5)
+               format short;
+               n=m_rec;
+               X1=linspace(a,b,n);
+               for i=1:n
+                rec_F(i)=subs(f,x,X1(i));
+               end
 
-               a_rec_izq=area([a b],[subs(f,x,a),subs(f,x,a)]);
-               a_rec_izq.FaceColor = [0.2 0.6 0.5];
-               a_rec_izq.EdgeColor = [0.63 0.08 0.18];
+               
+               scatter(X1,rec_F,40,'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+               grid on;
+               hold on;
+
+               for i=2:n
+                    
+                    a_rec=area([X1(i-1) X1(i)],[rec_F(i) rec_F(i)]);                   
+                    a_rec.FaceColor = [0.2 0.6 0.5];
+                    a_rec.EdgeColor = [0.63 0.08 0.18];
+               end
                grid on;
                hold on;
                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
-               title('Rectangulo Izquierdo (1 punto)');
+               title('Rectangulo Compuesto Derecho 100 puntos');
                xlabel('x');
                axis([a b -1.2 1.2]);
                grid on;
                hold on;
 
-               scatter(a,subs(f,x,a),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+%       --> Dibujamos Rectangulo Compuestos Medio delta=cte     
+%           Dibujamos 100 puntos que seran la altura de cada uno de los
+%           Rectangulos que utilizaremos para obtener la Aproximacion a treves
+%           de la Formula del Rectangulo Compuesto
+               subplot(2,3,6)
+               format short;
+               n=m_rec;
+               X1=linspace(a,b,n);
+               for i=1:n
+                rec_F(i)=subs(f,x,X1(i));
+               end
+
+               
+               scatter(X1,rec_F,40,'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
                grid on;
                hold on;
 
-%       --> Dibujamos Rectangulo Derecho
-               subplot(2,2,3)
-
-               a_rec_der=area([a b],[subs(f,x,b),subs(f,x,b)]);
-               a_rec_der.FaceColor = [0.2 0.6 0.5];
-               a_rec_der.EdgeColor = [0.63 0.08 0.18];
+               for i=2:n
+                    
+                    a_rec=area([X1(i-1) X1(i)],[subs(f,x,(X1(i-1)+X1(i))/2) subs(f,x,(X1(i-1)+X1(i))/2)]);                   
+                    a_rec.FaceColor = [0.2 0.6 0.5];
+                    a_rec.EdgeColor = [0.63 0.08 0.18];
+               end
                grid on;
                hold on;
                plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
-               title('Rectangulo Derecho (1 punto)');
+               title('Rectangulo Compuesto Medio 100 puntos');
                xlabel('x');
                axis([a b -1.2 1.2]);
-               grid on;
-               hold on;
-
-               scatter(b,subs(f,x,b),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
                grid on;
                hold on;
 
                
-%       --> Dibujamos Rectangulo Medio
-               subplot(2,2,4);
-                
-               a_rec_medio=area([a b],[subs(f,x,(b-a)/2),subs(f,x,(b-a)/2)]);
-               a_rec_medio.FaceColor = [0.2 0.6 0.5];
-               a_rec_medio.EdgeColor = [0.63 0.08 0.18];
-               grid on;
-               hold on;
-               plot(X0,F,'MarkerEdgeColor',[0.1 0.1 0.1],'LineWidth',2);
-               title('Rectangulo Medio (1 punto)');
-               xlabel('x');
-               axis([a b -1.2 1.2]);
-               grid on;
-               hold on;
 
-               scatter((b-a)/2,subs(f,x,(b-a)/2),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
-               grid on;
-               hold on;
 
                
          
@@ -211,64 +291,67 @@
                 formula_Rectangulo_Izquierdo=1;
                 formula_Rectangulo_Derecho=0;
                 formula_Rectangulo_Medio=0;
-                formula_Rectangulo_Compuesta_delta_cte=0;
-                formula_Rectangulo_Compuesta_delta_no_cte=0;
+                formula_Rectangulo_Compuesta_Izquierda_delta_cte=0;
+                formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
+                formula_Rectangulo_Compuesta_Medio_delta_cte=0;
                 rutina1;
                 % Obtenemos Aproximacion Formula Punto Extremo Izquierdo
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=1;
                 formula_Rectangulo_Medio=0;
-                formula_Rectangulo_Compuesta_delta_cte=0;
-                formula_Rectangulo_Compuesta_delta_no_cte=0;
+                formula_Rectangulo_Compuesta_Izquierda_delta_cte=0;
+                formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
+                formula_Rectangulo_Compuesta_Medio_delta_cte=0;
                 rutina1;
                 % Obtenemos Aproximacion Formula Punto Extremo Izquierdo
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=0;
                 formula_Rectangulo_Medio=1;
-                formula_Rectangulo_Compuesta_delta_cte=0;
-                formula_Rectangulo_Compuesta_delta_no_cte=0;
+                formula_Rectangulo_Compuesta_Izquierda_delta_cte=0;
+                formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
+                formula_Rectangulo_Compuesta_Medio_delta_cte=0;
                 rutina1;
 
 %       --> Calculamos Aproximacion a traves de la Formula Rectangulo
-%           Compuesta con m=100 puntos deltaX constante
+%           Compuesta Izquierda con m=100 puntos deltaX constante
                 formula_Rectangulo_Izquierdo=0;
                 formula_Rectangulo_Derecho=0;
                 formula_Rectangulo_Medio=0; 
-                formula_Rectangulo_Compuesta_delta_cte=1;
-                formula_Rectangulo_Compuesta_delta_no_cte=0;
+                formula_Rectangulo_Compuesta_Izquierda_delta_cte=1;
+                formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
+                formula_Rectangulo_Compuesta_Medio_delta_cte=0;
                 rutina1;
 
 %       --> Calculamos Aproximacion a traves de la Formula Rectangulo
-%           Compuesta con m=100 puntos deltaX NO constante. Mirando el
-%           comportamiento de la funcion nos damos cuenta que eligiendo mas
-%           inteligentemente cada uno de los 100 puntos, quizas podamos
-%           obtener una mejor aproximacion que para el caso de tomar 100
-%           puntos equiespaciados.
-%           Quizas el mejor criterio para elegir la distancia entre dos
-%           puntos consecutivos sea teniendo en cuenta la frecuencia de la
-%           funcion que estamos aproximando.
-%           En este caso en particular nos damos cuenta que la frecuencia
-%           de la funcion que estamos aproximando f(x) = cos(-1 + x^2)
-%           aumenta a medida que avanzamos por el eje de abcisas x.
-%           Teniendo en cuenta que estamos utilizando rectangualos, quizas
-%           el mejor criterio que podemos utilizar para selecionar el ancho 
-%           de cada uno de los rectangulos sea el siguiente: a mayor
-%           frecuencia menor longitud de la base del rectangulo.
+%           Compuesta Izquierda con m=100 puntos deltaX constante
+                formula_Rectangulo_Izquierdo=0;
+                formula_Rectangulo_Derecho=0;
+                formula_Rectangulo_Medio=0; 
+                formula_Rectangulo_Compuesta_Izquierda_delta_cte=0;
+                formula_Rectangulo_Compuesta_Derecha_delta_cte=1;
+                formula_Rectangulo_Compuesta_Medio_delta_cte=0;
+                rutina1;
 
-%                 formula_Rectangulo_Izquierdo=0;
-%                 formula_Rectangulo_Derecho=0;
-%                 formula_Rectangulo_Medio=0; 
-%                 formula_Rectangulo_Compuesta_delta_cte=0;
-%                 formula_Rectangulo_Compuesta_delta_no_cte=1;
-%                 rutina1;
-%             
+%       --> Calculamos Aproximacion a traves de la Formula Rectangulo
+%           Compuesta Izquierda con m=100 puntos deltaX constante
+                formula_Rectangulo_Izquierdo=0;
+                formula_Rectangulo_Derecho=0;
+                formula_Rectangulo_Medio=0; 
+                formula_Rectangulo_Compuesta_Izquierda_delta_cte=0;
+                formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
+                formula_Rectangulo_Compuesta_Medio_delta_cte=1;
+                rutina1;
+
+         
             formula_Rectangulo_Izquierdo=0;
             formula_Rectangulo_Derecho=0;
             formula_Rectangulo_Medio=0; 
-            formula_Rectangulo_Compuesta_delta_cte=0;
-            formula_Rectangulo_Compuesta_delta_no_cte=0;
+            formula_Rectangulo_Compuesta_Izquierda_delta_cte=0;
+            formula_Rectangulo_Compuesta_Derecha_delta_cte=0;
+            formula_Rectangulo_Compuesta_Medio_delta_cte=0;
 
-
+fprintf('Fin Rectangulo\n');
+fprintf('...\n');
 %FIN APARTADO a)
 
 
@@ -340,6 +423,7 @@
                 funcion_trapz_2=0;
                 funcion_trapz_100=0;
                 funcion_trapz_1000=0;
+                funcion_trapz_10000=0;
                 rutina1;
                 
 
@@ -350,6 +434,7 @@
                 funcion_trapz_2=0;
                 funcion_trapz_100=0;
                 funcion_trapz_1000=0;
+                funcion_trapz_10000=0;
                 rutina1;
 
 %       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 2 puntos 
@@ -359,6 +444,7 @@
                 funcion_trapz_2=1;
                 funcion_trapz_100=1;
                 funcion_trapz_1000=0;
+                funcion_trapz_10000=0;
                 rutina1;
 %       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 100 puntos 
 %           
@@ -367,6 +453,7 @@
                 funcion_trapz_2=0;
                 funcion_trapz_100=1;
                 funcion_trapz_1000=0;
+                funcion_trapz_10000=0;
                 rutina1;
 
 %       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 1000 puntos 
@@ -376,14 +463,28 @@
                 funcion_trapz_2=0;
                 funcion_trapz_100=0;
                 funcion_trapz_1000=1;
+                funcion_trapz_10000=0;
                 rutina1;
+
+%       --> Calculamos Aproximacion a traves de la Funcion trapx(x,f) 10000 puntos 
+%           
+%                 formula_Trapecio=0;
+%                 formula_Trapecio_Compuesta_delta_cte=0;
+%                 funcion_trapz_2=0;
+%                 funcion_trapz_100=0;
+%                 funcion_trapz_1000=0;
+%                 funcion_trapz_10000=1;
+%                 rutina1;
 
             formula_Trapecio=0;
             formula_Trapecio_Compuesta_delta_cte=0;
             funcion_trapz_2=0;
             funcion_trapz_100=0;
             funcion_trapz_1000=0;
+            funcion_trapz_10000=0;
 
+fprintf('Fin Trapecio\n');
+fprintf('...\n');
 %FIN APARTADO b)
 
 
@@ -402,42 +503,42 @@
                
                format short;
                n=m_simp;
-               X1=linspace(a,b,n);
+               X1_simp=linspace(a,b,n);
                for i=1:n
-                simp_F(i)=subs(f,x,X1(i));
+                simp_F(i)=subs(f,x,X1_simp(i));
                end
                 
                figure(4);
                subplot(1,2,1);
 
-               for i=2
+               for i=2:n-1
                     %Llamamos PPBL.m para obtener los Polinomios en Base de
                     %Lagrange del subintervalo [x(i-1) x(i+1)] con 3 puntos
                     %equiespaciados x(i-1), x(i) y x(i+1)
-                        L=PPBL(3,[X1(i-1) X1(i) X1(i+1)]);
+                        L=PPBL(3,[X1_simp(i-1) X1_simp(i) X1_simp(i+1)]);
 
                     %Lamamos PIL.m para obtener el Polinomio Interpolador
                     %de Lagrange p3(x) del subintervalo [x(i-1) x(i+1)]
                     % con 3 puntos equiespaciados x(i-1), x(i) y x(i+1)
-                        p=PIL(3,[X1(i-1) X(i) X(i+1)],L,f);
+                        p1=PIL(3,[X1_simp(i-1) X1_simp(i) X1_simp(i+1)],L,f);
 
                     %Dibujamos el Polinomio
                     %Interpolador de Lagrange p3(x) de cada subintervalo [x(i-1) x(i+1)]
 
                         
-                            X3=linspace(X1(i-1),X1(i+1),100);
-                            P=zeros(1,100);
+                            X4=linspace(X1_simp(i-1),X1_simp(i+1),100);
+                            P1=zeros(1,100);
                             for i=1:100
-                                P(i)=subs(p,x,X3(i));
+                                P1(i)=subs(p1,x,X4(i));
                             end
                             %Dibujamos area bajo la curva dado por el Polinomio
                             %Interpolador de Lagrange p3(x)
-                            a_simp_comp=area(X3,P);
+                            a_simp_comp=area(X4,P1);
                             a_simp_comp.FaceColor = [0.2 0.6 0.5];
                             a_simp_comp.EdgeColor = [0.63 0.08 0.18];
                             grid on;
                             hold on;
-                            plot(X3,P,'MarkerEdgeColor',[0.5 0.5 0.5],'LineWidth',2);
+                            plot(X4,P1,'MarkerEdgeColor',[0.5 0.5 0.5],'LineWidth',2);
                             grid on;
                             hold on;
 
@@ -516,11 +617,12 @@
             formula_Simpson=0;
             formula_Simpson_Compuesta_delta_cte=0;
 
-%FIN APARTADO b)
+fprintf('Fin Simpson 1/3');
+clc;
+%FIN APARTADO c)
 
-  
 % MOSTRAMOS RESULTADOS POR VENTANA DE COMANDOS          
-   format short;
+   
    fprintf('-----------------------------------------\n');
    fprintf('DATOS DEL PROBLEMA\n');
    fprintf('\n');
@@ -532,66 +634,136 @@
    fprintf('-----------------------------------------\n');
    fprintf('RESULTADOS\n');
    fprintf('\n');
-   fprintf('---> FAMILIA NEWTON-COTES\n');
    fprintf('\n');
-   
-   fprintf('--------> CONSTANTE (1 punto): FORMULA RECTANGULO');
+   fprintf('          (NOTA: los errores se calculan comparando con resultado funcion trap() 10.000 puntos\n');
+   fprintf('          (       el valor que arroja la funci?n trap() para 10.000 puntos se tomara como el\n');
+   fprintf('          (       valor analitico de la integral\n');
    fprintf('\n');
-   fprintf('          (NOTA: los errores se calculan comparando con resultado Rectangulo Compuesto delta=cte 100 puntos)\n');
-   fprintf('\n');
-   fprintf('--------------> PUNTO EXTREMO IZQUIERDO (1 punto)              ===> I = ');
-   disp(double(I_rec(1)));
-   fprintf('--------------> ERROR COMETIDO                                 ===> E = ');
-   disp(double(abs(I_rec(4)-I_rec(1))));
-   fprintf('\n');
-   fprintf('--------------> PUNTO EXTREMO DERECHO (1 punto)                ===> I = ');
-   disp(double(I_rec(2)));
-   fprintf('--------------> ERROR COMETIDO                                 ===> E = ');
-   disp(double(abs(I_rec(4)-I_rec(2))));
-   fprintf('\n');
-   fprintf('--------------> PUNTO MEDIO (1 punto)                          ===> I = ');
-   disp(double(I_rec(3)));
-   fprintf('--------------> ERROR COMETIDO                                 ===> E = ');
-   disp(double(abs(I_rec(4)-I_rec(3))));
-   fprintf('\n');
-   fprintf('--------------> RECTANGULO COMPUESTO delta=cte (100 puntos)    ===> I = ');
-   disp(double(I_rec(4)));
-   fprintf('\n');
-   fprintf('\n');
-   fprintf('--------> LINEAL (2 puntos): FORMULA TRAPECIO');
-   fprintf('\n');
-   fprintf('          (NOTA: el error se calcula comparando con resultado Trapecio Compuesto delta=cte 100 puntos)\n');
-   fprintf('\n');
-   fprintf('--------------> TRAPECIO (2 puntos)                            ===> I = ');
-   disp(double(I_trap(1)));
-   fprintf('--------------> ERROR COMETIDO                                 ===> E = ');
-   disp(double(abs(I_trap(2)-I_trap(1))));
-   fprintf('\n');
-   fprintf('--------------> TRAPECIO COMPUESTO delta=cte (100 puntos)      ===> I = ');
-   disp(double(I_trap(2)));
-   fprintf('\n');
-   fprintf('--------------> FUNCION trapz(x,f) (2 puntos)                ===> I = ');
-   disp(double(I_trap(3)));
-   fprintf('\n');
-   fprintf('--------------> FUNCION trapz(x,f) (100 puntos)                ===> I = ');
-   disp(double(I_trap(4)));
-   fprintf('\n');
-   fprintf('--------------> FUNCION trapz(x,f) (1000 puntos)                ===> I = ');
+   fprintf('--------------> FUNCION trapz(x,f) (1000 puntos) VALOR ANALITICO INTEGRAL ===> I = ');
    disp(double(I_trap(5)));
    fprintf('\n');
+   fprintf('---> FAMILIA NEWTON-COTES\n');
+   fprintf('\n');
+   fprintf('--------> CONSTANTE (1 punto): FORMULA RECTANGULO');
+   fprintf('\n');
+   fprintf('--------------> RECTANGULO IZQUIERDO (1 punto)                            ===> I = ');
+   disp(double(I_rec(1)));
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_rec(1))));
+   fprintf('\n');
+   fprintf('--------------> RECTANGULO DERECHO (1 punto)                              ===> I = ');
+   disp(double(I_rec(2)));
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_rec(2))));
+   fprintf('\n');
+   fprintf('--------------> RECTANGULO MEDIO (1 punto)                                ===> I = ');
+   disp(double(I_rec(3)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_rec(3))));
+   fprintf('\n');
+   fprintf('--------------> RECTANGULO COMPUESTO IZQUIERDO delta=cte (100 puntos)     ===> I = ');
+   disp(double(I_rec(4)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_rec(4))));
+   fprintf('\n');
+   fprintf('--------------> RECTANGULO COMPUESTO DERECHO delta=cte (100 puntos)       ===> I = ');
+   disp(double(I_rec(5)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_rec(5))));
+   fprintf('\n');
+   fprintf('--------------> RECTANGULO COMPUESTO MEDIO delta=cte (100 puntos)         ===> I = ');
+   disp(double(I_rec(6)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_rec(6))));
+   fprintf('\n');
+   fprintf('--------> LINEAL (2 puntos): FORMULA TRAPECIO');
+   fprintf('\n')
+   fprintf('--------------> TRAPECIO (2 puntos)                                       ===> I = ');
+   disp(double(I_trap(1)));
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_trap(1))));
+   fprintf('\n');
+   fprintf('--------------> TRAPECIO COMPUESTO delta=cte (100 puntos)                 ===> I = ');
+   disp(double(I_trap(2)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_trap(2))));
+   fprintf('\n');
+   fprintf('--------------> FUNCION trapz(x,f) (2 puntos)                             ===> I = ');
+   disp(double(I_trap(3)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_trap(3))));
+   fprintf('\n');
+   fprintf('--------------> FUNCION trapz(x,f) (100 puntos)                           ===> I = ');
+   disp(double(I_trap(4)));
+   fprintf('\n');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_trap(1))));
+   fprintf('\n');
    fprintf('--------> PARABOLICO (3 puntos): FORMULA SIMPSON 1/3');
-   fprintf('\n');
-    fprintf('          (NOTA: el error se calcula comparando con resultado Simposon 1/3 Compuesta delta=cte 100 puntos)\n');
-   fprintf('\n');
-   fprintf('--------------> SIMPSON 1/3 (3 puntos)                         ===> I = ');
+   fprintf('\n'); 
+   fprintf('--------------> SIMPSON 1/3 (3 puntos)                                    ===> I = ');
    disp(double(I_simp(1)));
-   fprintf('--------------> ERROR COMETIDO                                 ===> E = ');
-   disp(double(abs(I_simp(2)-I_simp(1))));
-   fprintf('\n');
-   fprintf('--------------> SIMPSON 1/3 COMPUESTO delta=cte (100 puntos)   ===> I = ');
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_simp(1))));
+   fprintf('\n'); 
+   fprintf('--------------> SIMPSON 1/3 COMPUESTO delta=cte (100 puntos)              ===> I = ');
    disp(double(I_simp(2)));
-   fprintf('---> FAMILIA CUADRATURA GAUSSIANA\n');
-        
+   fprintf('--------------> ERROR COMETIDO                                            ===> E = ');
+   disp(double(abs(I_trap(5)-I_simp(2))));
+   fprintf('\n');
+   fprintf('---> FAMILIA CUADRATURA GAUSSIANA: Quizas las veamos en alguna practica posterior\n');
+     
+   %Limpiamos Workspace
+    clear a_f;
+    clear a_rec;
+    clear a_rec_der;
+    clear a_rec_izq;
+    clear a_rec_medio;
+    clear a_simp_comp;
+    clear a_trap_com;
+    clear a_trap;
+    clear a_trap_comp;
+    clear deltaX;
+    clear F;
+    clear F_aux;
+    clear formula_Rectangulo_Compuesta_Derecha_delta_cte;
+    clear formula_Rectangulo_Compuesta_Izquierda_delta_cte;
+    clear formula_Rectangulo_Compuesta_Medio_delta_cte;
+    clear formula_Rectangulo_Derecho;
+    clear formula_Rectangulo_Izquierdo;
+    clear formula_Rectangulo_Medio;
+    clear formula_Simpson;
+    clear formula_Simpson_Compuesta_delta_cte;
+    clear formula_Trapecio;
+    clear formula_Trapecio_Compuesta_delta_cte;
+    clear funcion_trapz_100;
+    clear funcion_trapz_1000;
+    clear funcion_trapz_10000;
+    clear funcion_trapz_2;
+    clear i;
+    clear L;
+    clear p;
+    clear P;
+    clear p1;
+    clear P1;
+    clear rec_F;
+    clear simp_F;
+    clear trap_F;
+    clear x;
+    clear X;
+    clear X0;
+    clear X1;
+    clear X1_simp;
+    clear X2;
+    clear X3;
+    clear X4;
+    
 
 
 

@@ -56,25 +56,34 @@
         elseif (formula_Rectangulo_Medio==1)
             %-- 1 punto por definicion
             X=(a+b)/2;
-        elseif (formula_Rectangulo_Compuesta_delta_cte==1)
-            %-- 100 puntos libre eleccion
+        elseif (formula_Rectangulo_Compuesta_Izquierda_delta_cte==1)
+            %-- 100 puntos equiespaciados 
+            X=X1;
+        elseif (formula_Rectangulo_Compuesta_Derecha_delta_cte==1)
+            %-- 100 puntos equiespaciados 
+            X=X1;
+        elseif (formula_Rectangulo_Compuesta_Medio_delta_cte==1)
+            %-- 100 puntos equiespaciados 
             X=X1;
         %-- Puntos Discretos para Trapecio
         elseif (formula_Trapecio==1)
             %-- 2 puntos por definicion
             X=[a b];
         elseif (formula_Trapecio_Compuesta_delta_cte==1)
-            %-- 100 puntos libre eleccion
+            %-- 100 puntos equiespaciados 
             X=X1;
         elseif (funcion_trapz_2==1)
             %-- 2 puntos libre eleccion
             X=[a b];
         elseif (funcion_trapz_100==1)
-            %-- 100 puntos libre eleccion
+            %-- 100 puntos equiespaciados
             X=linspace(a,b,100);
         elseif (funcion_trapz_1000==1)
-            %-- 100 puntos libre eleccion
+            %-- 1000 puntos equiespaciados
             X=linspace(a,b,1000);
+        elseif (funcion_trapz_10000==1)
+            %-- 10000 puntos equiespaciados
+            X=linspace(a,b,10000);
         %-- Puntos Discretos para Simpson 1/3
         elseif (formula_Simpson==1)
             %-- 3 puntos por definicion
@@ -95,13 +104,27 @@
         elseif (formula_Rectangulo_Medio==1)
             %-- Formula Rectangulo Medio
             I_rec(3) = abs(subs(f,x,X(1))*(b-a));
-        elseif (formula_Rectangulo_Compuesta_delta_cte==1)
-            %-- Formula Rectangulo Compuesta delta=cte 100 puntos
+        elseif (formula_Rectangulo_Compuesta_Izquierda_delta_cte==1)
+            %-- Formula Rectangulo Compuesta Izquierda delta=cte 100 puntos
             deltaX=X(2)-X(1);
             I_rec(4)=0;
             for i=1:m_rec-1              
                 I_rec(4) = I_rec(4) + abs(rec_F(i)*(deltaX));
             end  
+        elseif (formula_Rectangulo_Compuesta_Derecha_delta_cte==1)
+            %-- Formula Rectangulo Compuesta Derecha delta=cte 100 puntos
+            deltaX=X(2)-X(1);
+            I_rec(5)=0;
+            for i=1:m_rec-1              
+                I_rec(5) = I_rec(5) + abs(rec_F(i+1)*(deltaX));
+            end 
+        elseif (formula_Rectangulo_Compuesta_Medio_delta_cte==1)
+            %-- Formula Rectangulo Compuesta Medio delta=cte 100 puntos
+            deltaX=X(2)-X(1);
+            I_rec(6)=0;
+            for i=2:m_rec              
+                I_rec(6) = I_rec(6) + abs(subs(f,x,(X(i-1)+X(i))/2)*(deltaX));
+            end 
         %-- Formulas Trapecio
         elseif (formula_Trapecio==1)
             %-- Formula Trapecio
@@ -125,6 +148,12 @@
                 F_aux(i)=abs(subs(f,x,X(i)));
             end
             I_trap(5)=trapz(X,F_aux);
+        elseif (funcion_trapz_10000==1)
+            %-- Formula Trapecio Compuesta delta=cte 1000 puntos
+            for i=1:10000
+                F_aux(i)=abs(subs(f,x,X(i)));
+            end
+            I_trap(6)=trapz(X,F_aux);
         %-- Formulas Simpson 1/3
         elseif (formula_Simpson==1)
             %-- Formula Simpson 1/3
@@ -134,7 +163,7 @@
             deltaX=X(2)-X(1);
             I_simp(2)=0;
             for i=2:m_simp-1 
-                I_simp(2)=I_simp(2) + 1/6*deltaX*(abs(trap_F(i-1))+4*abs(trap_F(i))+abs(trap_F(i+1)));
+                I_simp(2)=I_simp(2) + 1/6*deltaX*(abs(simp_F(i-1))+4*abs(simp_F(i))+abs(simp_F(i+1)));
             end
         end
     

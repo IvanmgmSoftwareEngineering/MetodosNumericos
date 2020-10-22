@@ -50,7 +50,7 @@ function Li = PPBL(n,X)
             L_aux(i)=sym('1');
             for j = 1:n
                 if(i~=j)
-                L_aux(i) = L_aux(i) * (x - X(j))/(X(i)-X(j));  
+                    L_aux(i) = L_aux(i) * (x - X(j))/(X(i)-X(j));  
                 end
             end
         end
