@@ -31,10 +31,10 @@
 %-------------------------------------------------------------------------------------------------
 %Empieza funcion
 
-function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
+function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
     %Control de Errores en Argumentos de Entrada
         %ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
-            if (n <= 1)
+            if (n < 1)
                 error ('El numero de puntos para calcular el Error de la Aproximacion utilizando Polinomio Interpolador de Lagrange debe ser mayor que cero')
             end
     %FIN Control de Errores en Argumentos de Entrada
@@ -77,8 +77,8 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                         % Evaluamos la funcion g(x) en los Extremos del
                         %intervalo
                         
-                            ga=subs(g,x,X(1));
-                            gb=subs(g,x,X(n));
+                            ga=subs(g,x,a);
+                            gb=subs(g,x,b);
                             
                             
                             
@@ -113,7 +113,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                             % Polinomio Interpolador de Lagrange.
                             
                             
-                                if(dg == 0)
+                                if(diff(dg) == 0)
                                     hay_puntos_Estacionarios=0;
                                     r=[];
                                 else                               
@@ -266,8 +266,13 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                 %particularizada en los puntos deonde la funcion g(x) No es
                 %Diferenciable (en caso de existir alguno).
                 
+                    max1_g=0;
+                    max2_g=0;
+                    max3_g=0;
+                   
                     if(hay_puntos_Estacionarios==0 && hay_puntos_No_Diferenciables==0)
                         cota_g=max(extremos_g);
+                        abs_gr=[];
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
                             max1_g=max(extremos_g);
@@ -281,11 +286,13 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                                 max2_g=max(abs_gr);
                                 vector=[max1_g max2_g];                       
                                 cota_g=max(vector);
+                                
                             else
                                 max1_g=max(extremos_g);
                                 max3_g=max(abs_gnd);
                                 vector=[max1_g max3_g];                       
                                 cota_g=max(vector);
+                                abs_gr=0;
                             end
                         end
                     end
@@ -302,8 +309,8 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                         % Evaluamos la funcion h(x) en los Extremos del
                         %intervalo
                         
-                            ha=subs(h,x,X(1));
-                            hb=subs(h,x,X(n));
+                            ha=subs(h,x,a);
+                            hb=subs(h,x,b);
                             
                             
                             
@@ -391,7 +398,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                                 
                          if(tipo_polinomio==1) %Entramos en el caso en que la funcion dh(x) Si es un Polinomio
                                 
-                                if(dh == 0)
+                                if(diff(dh) == 0)
                                     hay_puntos_Estacionarios=0;
                                     r3=[];
                                 else                               
@@ -493,25 +500,9 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                                 
                                 rdh=[];
                                 abs_hr=[];
-                                contador=1;
-                                for i=X(1):0.01:X(n)
-                                    if(subs(dh,x,i) == 0)
-                                        rdh(contador)=i;
-                                        contador=contador +1;
-                                    end
-                                end
+                                %Metodo de la Biseccion
+                                tolerancia=0.01;
                                 
-                                if(length(rdh)>0)
-                                    for i=1:length(rdh)
-                                        hr(i)=subs(h,x,rdh(i));
-                                    end
-                                end
-                                
-                                if(length(rdh)>0)
-                                    for i=1:length(rdh)
-                                        abs_hr(i)=abs(hr(i));
-                                    end
-                                end
                                         
                                 
                         
@@ -610,8 +601,12 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                 %particularizada en los puntos deonde la funcion h(x) No es
                 %Diferenciable (en caso de existir alguno).
                 
+                    max1_h=0;
+                    max2_h=0;
+                    max3_h=0;
                     if(hay_puntos_Estacionarios==0 && hay_puntos_No_Diferenciables==0)
-                        cota_h=max(extremos_h);
+                        cota_h=max(extremos_h)
+                        abs_hr=[];
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
                             max1_h=max(extremos_h);
@@ -630,6 +625,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
                                 max3_h=max(abs_hnd);
                                 vector=[max1_h max3_h];                       
                                 cota_h=max(vector);
+                                abs_hr=0;
                             end
                         end
                     end
@@ -638,7 +634,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(n,X,f)
            
            %Ahora ya estamos ya podemos dar la Cota de la funcion E(x)
            
-           cota=val1*cota_g*cota_h;
+           cota=val1*cota_g*cota_h
         %FIN calculo Cota funcion E(x)
                            
         

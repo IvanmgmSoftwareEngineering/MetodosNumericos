@@ -44,8 +44,8 @@
 
     %Tomamos n Puntos Equiespaciados dentro del Intervalo Cerrado [a,b] y los
     %almacenamos en un vector fila llamado 'X'.
-        X=[0 0.6 1.4 2];
-        %X=linspace(a,b,n);
+        %X=[0 0.6 1.4 2];
+        X=linspace(a,b,n);
 
     %Llamamos a la funcion PPBL.m para obtener los Polinomios en Base de
     %Lagrange
@@ -66,7 +66,7 @@
      %la Cota de Error.
         abs_gr=[];
         abs_hr=[];
-        [error,cotaError,g,h,abs_gr,abs_hr]=Error(n,X,f);
+        [error,cotaError,g,h,abs_gr,abs_hr]=Error(a,b,n,X,f);
     
         
 

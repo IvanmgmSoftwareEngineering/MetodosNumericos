@@ -2,23 +2,24 @@
 %  DESCRIPCION: Calculo de los PPBL, PIL, Error y Cota Error
 %  AUTOR: IVAN MARTIN GOMEZ
 
-%% Ejercicio 4: 
+%% practica1.1:
+
 %  Datos: 
 %       --> Funcion que queremos Aproximar:         f(x) =cos(4*x/pi)+exp(-x)
 %       
 %       --> Intervalo Cerrado:                      [0,2]
 %       --> Numero puntos utilizados Aproximacion:  Apartado a)n=3 [0 0.6 2]
-%                                                   Apartado b)n=4 [0 0.6 1.4 2]
-%  nota: Solucion oficial:          
-%        Solucion obtenida por mi:  
+%                                                   Apartado b)n=4 [0 0.6 1.4 2] 
 
+%----------------------------------------------------------------------------------
+close all;
+clear all;
+clc;
 
 %       --> Especificamos Funcion f(x)= cos(5*x +2)*x^2 que queremos 
 %           Aproximar mediante el Polinomio
 %           Interpolador de Lagrange
-                close all;
-                clear all;
-                clc;
+                
                 syms x;               
                 f = cos(4*x/pi)+exp(-x);
                 
@@ -30,7 +31,7 @@
 %       --> Especificamos el numero de puntos discretos que utilizaremos en
 %           la Aproximacion
 %               
-                n=4;
+                n=1;
                 
 %       
 
@@ -66,6 +67,13 @@
                     for i=1:n
                         I(i)=subs(p,x,X(i));
                     end
+                    if (n==1)
+                        X1=[0 2];
+                        plot(X1,[I(1) I(1)],'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2); 
+                        scatter(X,I(1),'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .7 .7],'LineWidth',2);
+
+
+                    end
                     plot(X,I,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2, 'Marker','*','MarkerFaceColor',[0.2 0.2 0.2],'MarkerSize',21);               
                     legend('f(x) = cos(x)','Aproximacion n=4'); 
                     lgd = legend;
@@ -100,7 +108,7 @@
                    lgd = legend;
                    lgd.FontSize = 18;
                    
-   % Muestor por Ventada de Comandos los datos del problema y los
+   % Muestro por Ventada de Comandos los datos del problema y los
    % resultados mas relevantes:
    format short;
    fprintf('-----------------------------------------\n');
@@ -123,7 +131,11 @@
    fprintf('---> Polinomios en Base de Lagrange (PPBL)\n');
    for i=1:n
    fprintf('--------> L%i(x) = ',i);
-   disp(collect(L(i)));
+    if(n==1)
+        disp(L(i));
+    else
+            disp(collect(L(i)));
+    end
    end
    fprintf('\n');
    fprintf('---> Polinomio Interpolador de Lagrange (PIL)\n');
@@ -180,7 +192,7 @@
    fprintf('FIN-----------------------------------------------\n');
    
    
-   
+   clear C;
    
    
 

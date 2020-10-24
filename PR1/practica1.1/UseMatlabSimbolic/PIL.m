@@ -29,7 +29,7 @@ function p = PIL(n,X,L,f)
 
     %Control de Errores en Argumentos de Entrada
         %ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
-            if (n <= 1)
+            if (n < 1)
                 error ('El numero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
             end
     %FIN Control de Errores en Argumentos de Entrada

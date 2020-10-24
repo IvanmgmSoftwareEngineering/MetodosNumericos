@@ -27,19 +27,23 @@
 function Li = PPBL(n,X)
     %Control de Errores en Argumentos de Entrada
         %ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
-            if (n <= 1)
-                error ('El n?mero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
+            if (n < 1)
+                error ('El numero de puntos para calcular los Polinomios en Base Lagrange debe ser mayor que cero')
             end
     %FIN Control de Errores en Argumentos de Entrada
 %-------------------------------------------------------
 %-------------------------------------------------------
     %Empieza funcionalidad funcion
         syms x;
-        for i = 1:n     
-            L(i)=sym('1');
-            for j = 1:n
-                if(i~=j)
-                    L(i) = L(i) * (x - X(j))/(X(i)-X(j));  
+        if(n==1)
+            L(1)=1;
+        else
+            for i = 1:n     
+                L(i)=sym('1');
+                for j = 1:n
+                    if(i~=j)
+                        L(i) = L(i) * (x - X(j))/(X(i)-X(j));  
+                    end
                 end
             end
         end
