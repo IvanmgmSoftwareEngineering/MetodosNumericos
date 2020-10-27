@@ -44,8 +44,8 @@
 
     %Tomamos n Puntos Equiespaciados dentro del Intervalo Cerrado [a,b] y los
     %almacenamos en un vector fila llamado 'X'.
-        %X=[0 0.6 1.2 1.6 2];
-        X=linspace(a,b,n);
+        X=[0 0.6 1.4 2];
+        %X=linspace(a,b,n);
 
     %Llamamos a la funcion PPBL.m para obtener los Polinomios en Base de
     %Lagrange

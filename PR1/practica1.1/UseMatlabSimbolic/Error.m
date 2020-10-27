@@ -398,12 +398,12 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
                                 
                          if(tipo_polinomio==1) %Entramos en el caso en que la funcion dh(x) Si es un Polinomio
                                 
-                                if(diff(dh) == 0)
+                                if(dh == 0)
                                     hay_puntos_Estacionarios=0;
                                     r3=[];
                                 else                               
-                                    cdh=coeffs(dh) %Ordenado de menor a mayor
-                                    chd = fliplr(cdh) %Ordenado de mayor a menor 
+                                    cdh=coeffs(dh); %Ordenado de menor a mayor
+                                    chd = fliplr(cdh); %Ordenado de mayor a menor 
                                     if(length(cdh) == 1)
                                         hay_puntos_Estacionarios=0;                                       
                                         r3=[];
@@ -411,7 +411,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
                                         % Obtenemos las raices de la
                                         % derivada de g(x). 
                                             r4=[];
-                                            r4=roots(cdh)
+                                            r4=roots(cdh);
                                             
                                         % Solo nos interesan las raices reales.    
                                         % Eliminamos las raices imaginarias
@@ -498,10 +498,21 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
                                 % mas o menos en arrojar una solucion en
                                 % caso de encontrarla.
                                 
-                                rdh=[];
-                                abs_hr=[];
+                                
                                 %Metodo de la Biseccion
-                                tolerancia=0.01;
+                                Zeros=[];
+                                epsilon=0.1;
+                                Zeros = MB(a,b,dh,epsilon);
+                                if(length(Zeros)>0)
+                                    hay_puntos_Estacionarios=1;
+                                    for(i=1:length(Zeros))
+                                        hr(i)=subs(h,x,Zeros(i));
+                                    end
+                                    for i=1:length(hr)
+                                        abs_hr(i)=abs(hr(i));
+                                    end
+                                end
+                                    
                                 
                                         
                                 
@@ -605,7 +616,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
                     max2_h=0;
                     max3_h=0;
                     if(hay_puntos_Estacionarios==0 && hay_puntos_No_Diferenciables==0)
-                        cota_h=max(extremos_h)
+                        cota_h=max(extremos_h);
                         abs_hr=[];
                     else
                         if(hay_puntos_Estacionarios==1 && hay_puntos_No_Diferenciables==1)
@@ -634,7 +645,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
            
            %Ahora ya estamos ya podemos dar la Cota de la funcion E(x)
            
-           cota=val1*cota_g*cota_h
+           cota=val1*cota_g*cota_h;
         %FIN calculo Cota funcion E(x)
                            
         

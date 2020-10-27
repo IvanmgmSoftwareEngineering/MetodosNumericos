@@ -31,7 +31,7 @@ clc;
 %       --> Especificamos el numero de puntos discretos que utilizaremos en
 %           la Aproximacion
 %               
-                n=5;
+                n=3;
                 
 %       
 
@@ -112,8 +112,8 @@ clc;
                    
                   %Dibujo la comparaci?n entre f(x) y p(x), es decir,
                   %|f(x)-p(x)|
-                  X2=linspace(a,b,1000);
-                  for i=1:1000
+                  X2=linspace(a,b,100);
+                  for i=1:100
                         I1(i)=subs(p,x,X2(i));
                         F1(i)=subs(f,x,X2(i));
                         compara(i)=abs(I1(i)-F1(i));

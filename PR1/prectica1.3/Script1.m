@@ -22,12 +22,12 @@ clc;
 %           Interpolador de Lagrange
                 
                 syms x;               
-                f = cos(x^2 -1);
+                f = diff(- exp(-x) - (4*sin((4*x)/pi))/pi);
                 
 %       --> Especificamos el intervalo cerrado [a,b].
 %               
                 a=0;
-                b=2*pi;
+                b=2;
                 
 %       --> Especificamos Tolerancia
 %               
