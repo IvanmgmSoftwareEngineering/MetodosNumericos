@@ -133,6 +133,7 @@ function [e,cota,g,h,abs_gr,abs_hr] = Error(a,b,n,X,f)
                                             contador=0;
                                             if(length(r1)>0)                                               
                                                 for i=1:length(r1)
+                                                    
                                                     if(imag(r1(i))==0)
                                                         r(i)=r1(i);
                                                         contador=1;

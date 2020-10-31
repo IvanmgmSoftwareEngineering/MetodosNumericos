@@ -134,15 +134,15 @@ clc;
                 a=0;
                 b=2*pi;
                 
-%       --> Especificamos Numero de puntos para aproximacion Formulas Compuestas Rectangulo
+%       --> Especificamos Numero de  Sub-intervalos para aproximacion Formulas Compuestas Rectangulo
 
                 m_rec=100;
                 
-%       --> Numero de puntos para aproximacion Formula Compuesta Trapecio
+%       --> Numero de  Sub-intervalos para aproximacion Formula Compuesta Trapecio
 
                 m_trap=100;
                 
-%       --> Numero de puntos para aproximacion Formula Compuesta Simpson 1/3  
+%       --> Numero de  Sub-intervalos para aproximacion Formula Compuesta Simpson 1/3  
 
                 m_simp=100;
 
@@ -152,7 +152,7 @@ clc;
 %              Medio solo se utiliza un punto. Para comparar la calidad de
 %              las Aproximaciones hechas con cada una de las tres formulas
 %              utilizaremos la Formula del Rectangulo Compuesto con m_rec = 100
-%              puntos
+%              Sub-intervalos
 
               
 
@@ -253,7 +253,7 @@ clc;
 
 %       --> Dibujamos Rectangulo Compuestos Izquierdo delta=cte     
 %           Dibujamos 100 puntos que seran la altura de cada uno de los
-%           Rectangulos que utilizaremos para obtener la Aproximacion a treves
+%           Rectangulos que utilizaremos para obtener la Aproximacion a traves
 %           de la Formula del Rectangulo Compuesto
                
                subplot(2,3,4)
@@ -286,7 +286,7 @@ clc;
               
 %       --> Dibujamos Rectangulo Compuestos Derecho delta=cte     
 %           Dibujamos 100 puntos que seran la altura de cada uno de los
-%           Rectangulos que utilizaremos para obtener la Aproximacion a treves
+%           Rectangulos que utilizaremos para obtener la Aproximacion a traves
 %           de la Formula del Rectangulo Compuesto
                
                subplot(2,3,5)
@@ -428,7 +428,7 @@ fprintf('...\n');
 
 %  Apartado b) Por definicion de la Formula del Trapecio solo utilizamos 2
 %  puntos para la Aproximacion. Para comparar la calidad de la Aproximacion
-%  utilizaremos la Formula del Trapecio Compuesta para m_trap = 100 puntos.
+%  utilizaremos la Formula del Trapecio Compuesta para m_trap = 100  Sub-intervalos.
 
                 
 
@@ -562,7 +562,7 @@ fprintf('...\n');
 
 %  Apartado c) Por definicion de la Formula de Simpson 1/3 solo utilizamos 3
 %  puntos para la Aproximacion. Para comparar la calidad de la Aproximacion
-%  utilizaremos la Formula de Simpson 1/3 Compuesta para m_trap = 100 puntos.
+%  utilizaremos la Formula de Simpson 1/3 Compuesta para m_trap = 100  Sub-intervalos.
 
               
 

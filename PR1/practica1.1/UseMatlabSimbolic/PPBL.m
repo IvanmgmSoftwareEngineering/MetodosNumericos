@@ -16,7 +16,7 @@
 %                             
 %
 % ERRORES:
-%   ERROR 1: Se comprueba que n >= 2, en caso contrario se devuelve error.
+%   ERROR 1: Se comprueba que n >= 1, en caso contrario se devuelve error.
 % 
 % DESCRIPCION: Esta funcion calcula cada uno de los Polinomios en Base de Lagrange  
 %              

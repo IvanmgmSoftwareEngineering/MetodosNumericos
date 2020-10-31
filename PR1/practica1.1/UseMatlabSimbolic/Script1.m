@@ -8,15 +8,14 @@
 %       --> Funcion que queremos Aproximar:         f(x) =cos(4*x/pi)+exp(-x)
 %       
 %       --> Intervalo Cerrado:                      [0,2]
-%       --> Numero puntos utilizados Aproximacion:  Apartado a)n=3 [0 0.6 2]
-%                                                   Apartado b)n=4 [0 0.6 1.4 2] 
+%       --> Numero puntos utilizados Aproximacion:  n
 
 %----------------------------------------------------------------------------------
 close all;
 clear all;
 clc;
 
-%       --> Especificamos Funcion f(x)= cos(5*x +2)*x^2 que queremos 
+%       --> Especificamos Funcion f(x)= cos(4*x/pi)+exp(-x) que queremos 
 %           Aproximar mediante el Polinomio
 %           Interpolador de Lagrange
                 
@@ -35,7 +34,7 @@ clc;
                 
 %       
 
-%      CASO 0)Dibujamos la funcion f(x)= cos(x) en un numero
+%       --> Dibujamos la funcion f(x)= cos(x) en un numero
 %             suficientemente grande de puntos del Intervalo Cerrado [0,pi/2] 
 %             para utilizarlo como modelo de la funcion real en dicho              
 %             intervalo.
@@ -56,7 +55,7 @@ clc;
                grid on;
                hold on;
          
-%        CASO 1) Cuatro puntos ==> n = 4 [0,pi/6,pi/3,pi/2]
+
 
                   rutina1; 
   
