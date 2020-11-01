@@ -40,7 +40,7 @@ end
     % que evitamos realizar es la asociada al Cirterio de parada asociado
     % con el valor de Tolerancia epsilon.
     
-        n = ceil((log((X(2)-X(1))/epsilon))/log(2));
+        n = ceil((log((X(2)-X(1))/epsilon))/log(2))
         
     % Empieza el bucle que calcula en n iteraciones una aproximacion de la
     % raiz de la funci?n f(x)
@@ -63,7 +63,7 @@ end
                     zero=X_aux(2);
                     break;
             end
-            if(f_superior==0)
+            if(f_medio==0)
                     zero=x_medio;
                     break;
             end

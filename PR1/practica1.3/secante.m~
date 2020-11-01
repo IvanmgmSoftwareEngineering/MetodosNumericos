@@ -3,22 +3,22 @@
 %  Datos: 
 %       --> Funcion que queremos Aproximar:         f(x)  
 %       
-%       --> Punto inicial x0:                       x0
+%       --> Vector inicial :                        X
 %
 %       --> Tolerancia:                             epsilon  
 
 
 
-function [zero] = newton(f,x0,epsilon)
+function [zero] = secante(f,X,epsilon)
 syms x ;
 
-    x0_aux=x0;
+    X_aux=X;
     contador_iteraciones=0;
     while(true)
         contador_iteraciones=contador_iteraciones+1;
-        f0=double(subs(f,x,x0_aux));
-        df=diff(f);
-        df0=double(subs(df,x,x0_aux));
+        f0=double(subs(f,x,X_aux(1));
+        f1=double(subs(f,x,X_aux(2));
+        df1=double(subs((f1-f0)/(X_aux(2)-X_aux(2))));
         x_aux=(-f0/df0)+x0_aux;
     
         if(abs(x_aux-x0_aux)<epsilon)
