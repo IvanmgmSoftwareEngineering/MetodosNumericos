@@ -31,15 +31,15 @@ function x_out = sustitucion_regresiva_inversa( U,b_in )
     %Control de Errores de Argumentos
         %Error 2
          if(N~=size_A(2))
-            fprintf('Error: las dimensiones de la Matriz A y del Vector b no son validas');
+            fprintf('Error: las dimensiones de la Matriz A y del Vector b no son validas\n');
             return;
          end
          %Error 1
          for i=1:N
              for j=1:N
-                if(A(i,j)~=0)
+                if(A(i,j)>=10^-10)
                     if(i>j)
-                        fprintf('Error: Este Metodo no es aplicable. La Matriz U debe ser Diagonal Superior.');
+                        fprintf('Error: Este Metodo no es aplicable. La Matriz U debe ser Diagonal Superior.\n');
                         return; 
                     end
                 end
@@ -48,7 +48,7 @@ function x_out = sustitucion_regresiva_inversa( U,b_in )
              
     %FIN Control de Errores de Argumentos
         
-        x(N) = b(N)/A(N,N)
+        x(N) = b(N)/A(N,N);
         for i=N-1:-1:1
             suma=0;
             for j=i+1:N

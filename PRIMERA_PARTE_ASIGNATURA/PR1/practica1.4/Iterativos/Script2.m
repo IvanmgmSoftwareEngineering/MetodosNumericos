@@ -16,20 +16,22 @@
 %% EJERCICIO: Ax=b
 
 %  Datos: 
-%       --> Matriz A:                  A (n filas x n columnas)
+%       --> Matriz A:                  A (n filas x n columnas). Matriz de Coeficientes
 %       
-%       --> Vector x_sol:              x (n filas x 1 columnas)          
+%       --> Vector x_sol:              x (n filas x 1 columnas). Solucion Exacta       
 %
-%       --> Vector b:                  b (n filas x 1 columnas)
+%       --> Vector b:                  b (n filas x 1 columnas). Matriz terminos Independientes
 %
-%       --> Vector x_0:                x_0 (n filas x 1 columnas). Aproximacion
-%                                                                  Inicial
-%       --> Tolerancia:                delta
+%       --> Vector x_0:                x_0 (n filas x 1 columnas). Aproximacion Inicial
+%
+%       --> Tolerancia:                tolerancia
 
 %   --> Descripcion: Obtener una aproximacion del vector x utilizando el Metodo
 %                    de Jacobi. Busca la Solucion del Sistema Lineal del tipo: x_k = B * x_k-1 + C donde:
 %                                                                                                   B = D^1*[A-D]
 %                                                                                                   C = D^1*b     donde:
+%                    Obtener una aproximacion del vector x utilizando el Metodo
+%                    de Gauss-Seidel. 
 %                                                                                                                      D= d_ii=a_ii y d_ij=0 (si i~=j) 
 %   --> Normas de Vectores:
 %           - Norma 'p' de Vector 'v=[v_1 v_2 ... v_i ... v_n]': ||v||p = (sumatorio (desde 1 hasta n)[|v_i|^p])^(1/p)
@@ -51,14 +53,15 @@
 %
 %   --> Criterios de parada:
 %           - Criterio de Parada 1: Numero maximo de Iteraciones (Parada de
-%                                 emergencia por si el Criterio de Parada 2 falla (hay funciones que tienen
-%                                 MUY lentamente a cero)
+%                                   emergencia por si el Criterio de Parada 2 falla (hay funciones que tienen
+%                                   MUY lentamente a cero)
 %           - Criterio de Parada 2: Tolerancia delta; if(||error_k|| < delta) ==> STOP  
 %           - Criterio de Parada 3: Tolerancia delta: if(||r_k|| < delta) ==> STOP
 %
-%   --> Condiciones de Convergencia: (?sobre B = D^-1*[A-D] y C = D^1 * b
+%   --> Condiciones de Convergencia:
 %           - Condicion 1: Comprobar si A es estrictamente Diagonal Dominante por filas
 %           - Condicion 2: rho(B) = Radio Espectral < 1. donde:
+%                                                         B = D^-1*[A-D]
 %                                                         rho(B)=max{|lambda_i|}. No confuncir estos lambdas con los de
 %                                                         antes, estos lambdas son los autovalores asociados a la Matriz B
 %
@@ -67,30 +70,41 @@
 close all;
 clear all;
 clc;
-format short;
+format long;
 
 
         % Introduciomos los datos del Ejercicio
         
-            A=[5 2 -1 1;1 7 3 -1;-1 4 9 2;1 -1 1 4]
-            b=[12;2;1;3]
+            A=[5 2 -1 1;1 7 3 -1;-1 4 9 2;1 -1 1 4]; %% ES DIAGONAL DOMINANTE ==> PODEMOS ASEGURAR QUE EL METODO CONVERGE
+            b=[12;2;1;3];
             x_sol=[2.7273 -0.4040 0.6364 -0.1919];
-            delta=10^-5
+            tolerancia=10^-5.4;
             x_0= [0 0 0 0];
             
 % RESOLVEMOS POR JACOBI
         % Llamamos a la funcion jacobi.m
-            [x_aproximaciones_jacobi,error_1_jacobi,error_2_jacobi] = jacobi(A,b,delta,x_0,x_sol)
- 
+            
+            tStart=tic; % Tomamos captura de la hora actual
+            [x_aproximaciones_jacobi,error_1_jacobi,error_2_jacobi] = jacobi(A,b,tolerancia,x_0,x_sol)
+            tiempo_jacobi=toc(tStart)% Tomamos captura de la hora actual y calculamos la diferecnia
+            tolerancia %Imprimimos por vantana de comandos el valor de la Tolerancia
+        % Donde:
+            % error_1_jacobi: es el error calculado con la Solucion Real (x_sol)
+            % error_2_jacobi: es el error calculado con la Iteracion anterior 
 % FIN JACOBI 
 % ----------------------------------------------------------------------------             
 % ----------------------------------------------------------------------------             
 % RESOLVEMOS POR GAUSS-SEIDEL                 
         % Llamamos a la funcion gauss_seidel.m
-                [x_aproximaciones_gauss, error_1_gauss, error_2_gauss] = gauss_seidel(A,b,delta,x_0,x_sol)
         
-            % Donde:
-                % error_1_gauss: es el error calculado con la Solucion Real (x_sol)
+             tStart=tic; % Tomamos captura de la hora actual
+             [x_aproximaciones_gauss, error_1_gauss, error_2_gauss] = gauss_seidel(A,b,tolerancia,x_0,x_sol)
+             tiempo_gauss_seidel=toc(tStart)% Tomamos captura de la hora actual y calculamos la diferecnia
+             tolerancia %Imprimimos por vantana de comandos el valor de la Tolerancia
+           
+             
+             % Donde:
+                % error_1_gauss: es el error calculado con la Solucion Exacta (x_sol)
                 % error_2_gauss: es el error calculado con la Iteracion anterior 
 
 
