@@ -105,41 +105,24 @@ y0=0.5; % Condicion Inicial
                 for i=2:length(tn)
                     solucion_aproximada(i)=solucion_aproximada(i-1) + paso*(solucion_aproximada(i-1)-tn(i-1)^2 +1);
                 end
-                figure(2);
                 grid on;
                 hold on;
                 % Dibujamos Aproximacion
                 plot(tn,solucion_aproximada,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2); 
+                %scatter(tn,solucion_aproximada,'MarkerEdgeColor',[0.2 0.2 0.2],'MarkerFaceColor',[0 .2 .2],'LineWidth',2);
                 grid on;
                 hold on;
                 
-                % Obtenemos el Error
-                for i=1:length(tn)
-                    error(i)=abs(solucion_exacta(i)-solucion_aproximada(i));
-                end
-                % Dibujamos el Error
-                figure(3);
-                plot(tn,error,'MarkerEdgeColor',[0.2 0.2 0.2],'LineWidth',2); 
-                grid on;
-                hold on;
+                
                 
                 
             
                 paso=paso/2; %% Reducimos el paso a la mitad para la siguiente Iteracion
                 j=j+1;
             end
-            figure(2);
             title('Estudio Convergencia');
             xlabel('t');
             axis([a b 0 3]);
-            legend('Aproximaci?n h=0.2','Aproximaci?n h=0.1','Aproximaci?n h=0.05','Aproximaci?n h=0.025','Aproximaci?n h=0.0125','Aproximaci?n h=0.00625'); 
-            lgd = legend;
-            lgd.FontSize = 14;
-            
-            figure(3);
-            title('Error relativo');
-            xlabel('t');
-            axis([a b 0 0.2]);
             legend('Aproximaci?n h=0.2','Aproximaci?n h=0.1','Aproximaci?n h=0.05','Aproximaci?n h=0.025','Aproximaci?n h=0.0125','Aproximaci?n h=0.00625'); 
             lgd = legend;
             lgd.FontSize = 14;
