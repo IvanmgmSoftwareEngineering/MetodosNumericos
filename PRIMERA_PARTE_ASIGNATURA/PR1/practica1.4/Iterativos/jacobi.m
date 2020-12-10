@@ -26,13 +26,13 @@
 %                    numero de Filas del Vector b
 %
 %  Convergencia: 
-%       --> Condici?n 1: Suficiente y no necesaria: Que la Matriz A sea
+%       --> Condicion 1: Suficiente y no necesaria: Que la Matriz A sea
 %                                                   Diagonal Dominante por Filas
 %       --> Condicion 2: Suficiente y necesaria: Que rho(B)=Radio Espectral < 1. Donde: B = D^-1*[A-D], D=
 %                                                                                          D= d_ii=a_ii y d_ij=0 (si i~=j), rho(B)=max{|lambda_i|}, 
 %                                                                                          lambda_i = autovalores asociados matriz B
 %           (Nota Convergencia: comprobamos Condicion 1, en caso de cumplirse ya podemos afirmar que el Metodo Converge.
-%                               S?lo en el caso de no cumplirse la Condicion 1, comprobamos la Condicion 2.)                               
+%                               Solo en el caso de no cumplirse la Condicion 1, comprobamos la Condicion 2.)                               
 
 %  Descripcion: Esta funcion obtiene una aproximacion de la Solucion del
 %               Sistema de Ecuaciones Lineales
@@ -125,9 +125,9 @@ function [x,e1,e2] = jacobi(A_in,b_in,delta_in,x_0_in,x_sol_in)
 %----------------------------------------------------------------------------------
     %Comienza el Codigo del Metodo de Jacobi
        x_out(1,:)=x_0; %Guardo la aproximacion Inicial recibida como argumento en la primera fila de la Matriz x_out(k filas x n columnas)
-       contador=2; % Empieza en 2 por la caractreristica interna de Matlaba de empezar a indezar vectores por el 1 y no por el 0
-       error_2=x_0;% %Guardo la aproximacion Inicial recibida como argumento en la primera fila de la Matriz error_2(k filas x n columnas). Recordar que este es el error obtenido de comparar el valor de la aproximacion en la iteracion actural con el valor de la aproximacion de la iteracion anterior.
-       error_1=x_0;% %Guardo la aproximacion Inicial recibida como argumento en la primera fila de la Matriz error_1(k filas x n columnas). Recordar que este es el error obtenido de comparar el valor de la aproximacion en la iteracion actural con el valor de la aproximacion de la iteracion anterior.
+       contador=2; % Empieza en 2 por la caracteristica interna de Matlab de empezar a indexar vectores por el 1 y no por el 0
+       error_2=x_0;% %Guardo la aproximacion Inicial recibida como argumento en la primera fila de la Matriz error_2(k filas x n columnas). Recordar que este es el error obtenido de comparar el valor de la aproximacion en la iteracion actual con el valor de la aproximacion de la iteracion anterior.
+       error_1=x_0;% %Guardo la aproximacion Inicial recibida como argumento en la primera fila de la Matriz error_1(k filas x n columnas). Recordar que este es el error obtenido de comparar el valor de la aproximacion en la iteracion actual con el valor de la solucion exacta.
        continua=1;
        while(continua)
         continua_aux=0;
@@ -158,7 +158,7 @@ function [x,e1,e2] = jacobi(A_in,b_in,delta_in,x_0_in,x_sol_in)
         
        end
        Numero_Iteraciones_jacobi=contador-2;
-       Numero_Iteraciones_jacobi
+       Numero_Iteraciones_jacobi;
        x=x_out;
        e1=error_1;
        e2=error_2;
