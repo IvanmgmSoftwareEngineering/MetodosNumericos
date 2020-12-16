@@ -182,7 +182,7 @@ y0=0.5; % Condicion Inicial
                 end
 
 %       --> Representamos Graficamente: la Aproximacion obtenido mediante el
-%           Metodod de Euler Implicito y la Solcion Exacta
+%           Metodo de Euler Implicito y la Solcion Exacta
                format long;
                n0=100;
                X0=linspace(a,b,n0);
