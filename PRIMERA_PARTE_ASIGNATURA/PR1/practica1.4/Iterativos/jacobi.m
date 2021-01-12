@@ -78,7 +78,7 @@ function [x,e1,e2] = jacobi(A_in,b_in,delta_in,x_0_in,x_sol_in)
                     A_dominante_por_filas=0; 
                 end
             end
-        %Condicion 2 Convergencia: Condicion suficiente y necesaria: s?lo
+        %Condicion 2 Convergencia: Condicion suficiente y necesaria: solo
         %                          la comprobamos en caso de fallar la Condicion 1 Convergencia
             if(A_dominante_por_filas==0)
                 %Obtenemos Matriz D

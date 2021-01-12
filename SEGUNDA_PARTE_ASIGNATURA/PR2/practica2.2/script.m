@@ -1,4 +1,4 @@
-%% PRACTICA2.2: 
+%% PRACTICA2.2: FADFs para resolver EDOs
 
 %  AUTOR: IVAN MARTIN GOMEZ
 
@@ -304,7 +304,7 @@ clc;
 
 
 %Limpiamos Workspace
-clear contador continua continua_aux u_exacta delta h f n i n0 j L X0 F y_exacta lgd  P Q R suma Tolerancia_Jacobi u1 uL x x_0 x_out xn error_2 error_jacobi k Numero_Estudios paso  ;
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia F n0 solucion_Exacta_convergencia u1 u_exacta uL X0 y_exacta error_relativo_convergencia 
 %% PROBLEMA_2: Varilla
 
 %  Datos: 
@@ -518,6 +518,8 @@ clc;
             lgd.FontSize = 14;
             grid on;
             hold on;
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
 
 %Variamos parametros Fisicos
     %% Experimento 1: L=1 =>h=0.5(la mitad)
@@ -623,6 +625,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);    
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+
     
     %% Experimento 2: L=100 => h=50 (la mitad)
     Tamb=20;                              %<<<<----- DATO ENTRADA
@@ -727,6 +732,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+
     %% Experimento 3: Tamb=-273.15
     Tamb=-273.15;                         %<<<<----- DATO ENTRADA
     k=0.01;                               %<<<<----- DATO ENTRADA
@@ -830,6 +838,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+               
     %% Experimento 4: Tamb=120
     Tamb=120;                             %<<<<----- DATO ENTRADA
     k=0.01;                               %<<<<----- DATO ENTRADA
@@ -933,6 +944,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+               
     %% Experimento 5: Tamb=500
     Tamb=500;                             %<<<<----- DATO ENTRADA
     k=0.01;                               %<<<<----- DATO ENTRADA
@@ -1036,6 +1050,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+               
     %% Experimento 6: k=0.005
     Tamb=20;                              %<<<<----- DATO ENTRADA
     k=0.005;                              %<<<<----- DATO ENTRADA
@@ -1139,6 +1156,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+               
     %% Experimento 7: k=0.02
     Tamb=20;                              %<<<<----- DATO ENTRADA
     k=0.02;                               %<<<<----- DATO ENTRADA
@@ -1242,6 +1262,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 200]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+               
     %% Experimento 8: T1=90  y TL=150
     Tamb=20;                              %<<<<----- DATO ENTRADA
     k=0.01;                               %<<<<----- DATO ENTRADA
@@ -1345,6 +1368,9 @@ clc;
                xlabel('x');
                ylabel('T(x)');
                axis([0 L 0 150]);
+%Limpiamos Workspace
+clear contador continua continua_aux delta error_2 error_jacobi f i j k L h lgd n Numero_Estudios Numero_Iteraciones_jacobi Numero_Iteraciones_jacobi_convergencia P paso Q R suma T1 Tamb TL Tolerancia_Jacobi x x_0 X_jacobi x_out xn beta gamma alpha A_convergencia b_convergencia solucion_Aproximada_convergencia
+               
     %% Experimento 9: T1=-10 y TL=250
     Tamb=20;                              %<<<<----- DATO ENTRADA
     k=0.01;                               %<<<<----- DATO ENTRADA
